@@ -1,11 +1,5 @@
 <div id="sidebar" class="grid_3 omega">
   <aside class="widget">
-    <form action="${bf.config.site.root}search.html">
-      <input type="search" placeholder="Search..." name="q" />
-      <input type="submit" value="Search" />
-    </form>
-  </aside>
-  <aside class="widget">
     <h3>Contact</h3>
     <p>Patrick Gerken</p>
     <p> 
