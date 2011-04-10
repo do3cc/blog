@@ -2,7 +2,7 @@
         <nav>
           <ul id="menu" class="clearfix">
             ${item("", "About")}
-            ${item("blog/", "Blog")}
+            ${item("blog/", "Developer Blog")}
           </ul>
           <br class="clear" />
         </nav>
