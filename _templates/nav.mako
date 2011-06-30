@@ -3,6 +3,7 @@
           <ul id="menu" class="clearfix">
             ${item("", "About")}
             ${item("blog/", "Developer Blog")}
+            ${item("presentations/", "Presentations")}
           </ul>
           <br class="clear" />
         </nav>
@@ -11,5 +12,5 @@
     cl = ' class="current"'
   else:
     cl = ''
-  %><li${cl}><a href="${bf.config.site.root}${link}">${text}</a></li>
+  %><li${cl}><a href="${bf.config.site.root}${link}" bla="${current}" >${text}</a></li>
 </%def>

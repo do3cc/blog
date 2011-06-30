@@ -1,8 +1,3 @@
----
-categories: python, plone, buildout
-date: 2011/06/08 10:10:10
-title: How to add packages to buildout without breaking everything
----
 
 A short while ago, I helped a friend to debug a site. After adding blob
 support to a Plone 3 Site, about 20% of the requests for a specific
