@@ -52,6 +52,8 @@ blog.timezone = "Europe/Berlin"
 blog.auto_permalink.enabled = True
 blog.auto_permalink.path = ":blog_path/:year/:month/:day/:title"
 
+blog.disqus.enabled = True
+blog.disqus.name = 'do3cc'
 
 ## Markdown extensions
 ## These are turned off by default, but turned on

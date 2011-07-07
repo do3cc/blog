@@ -18,6 +18,8 @@
     <link href="${bf.config.site.root}css/960.css" rel="stylesheet" type="text/css" />
     <link href="${bf.config.site.root}style.css" rel="stylesheet" type="text/css" />
     <link rel='stylesheet' href='${bf.config.filters.syntax_highlight.css_dir}/pygments_${bf.config.filters.syntax_highlight.style}.css' type='text/css' />
+  	<script src="/js/jquery-1.6.2.min.js" type="text/javascript"></script>
+  	<script src="/camisinha/camisinha_social.js" type="text/javascript"></script>
     <!--[if lt IE 9]>
     	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
         <![endif]-->
