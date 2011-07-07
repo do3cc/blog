@@ -1,5 +1,5 @@
 ---
-title: Don't catch import errors, use pkg_resources
+title: Do not catch import errors, use pkg_resources
 categories: python, plone
 date: 2010/08/20 10:10:10
 ---
