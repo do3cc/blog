@@ -133,7 +133,7 @@
         </div>
       </li>
       <li class="slide">
-        <h1>Ausserdem möglich: Mashups Web 1.0 Style</h1>
+        <h1>Mashups Web 1.0 Style</h1>
         <div class="slidecontent">
           <img src="screenshot18.png" alt="" />
         </div>
