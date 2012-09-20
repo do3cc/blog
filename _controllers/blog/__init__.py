@@ -118,7 +118,7 @@ def materialize_template(template_name, location, attrs={}, lookup=None):
     #However, this uses the blog template lookup by default.
     if lookup==None:
         lookup = template_lookup
-    bf.writer.materialize_template(template_name, location, attrs, lookup)
+    bf.writer.materialize_template(template_name, location, attrs)
         
 def init():
     config["url"] = urlparse.urljoin(bf.config.site.url, config["path"])

@@ -9,7 +9,7 @@
       </time> | tags: 
 <% 
    tag_links = []
-   for tag in post.tags:
+   for tag in post.categories:
        if post.draft:
            #For drafts, we don't write to the tag dirs, so just write the categories as text
            tag_links.append(tag.name)
