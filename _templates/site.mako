@@ -20,6 +20,7 @@
     <link rel='stylesheet' href='${bf.config.filters.syntax_highlight.css_dir}/pygments_${bf.config.filters.syntax_highlight.style}.css' type='text/css' />
   	<script src="/js/jquery-1.6.2.min.js" type="text/javascript"></script>
   	<script src="/camisinha/camisinha_social.js" type="text/javascript"></script>
+  	<script src="http://cdn.lanyrd.net/badges/person-v1.min.js"></script>
     <!--[if lt IE 9]>
     	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
         <![endif]-->
@@ -33,6 +34,7 @@
     
   </head>
   <body>
+    <a href="http://lanyrd.com/profile/do3cc/" class="lanyrd-topbar lanyrd-type-attending lanyrd-noblank" rel="me"></a>
     <div id="wrapper" class="container_12">
       <header id="header" class="grid_12">
         <h1><a href="${bf.config.site.root}">${bf.config.blog.name}</a></h1>
