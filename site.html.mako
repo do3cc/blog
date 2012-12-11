@@ -19,7 +19,7 @@ href="https://github.com/do3cc/blog">git repository</a>.</p
     <h2><a href="http://www.google.de/search?q=nethack+elbereth">elbereth</a></h2>
   </header>
   Patrick Gerken<br />
-  81541 München Plettstrasse 14<br />
+  81735 München Plettstrasse 14<br />
   gerken@patrick-gerken.de<br />
   Tel: +49 89 7007 4288<br />
   Inhaltlich Verantwortlicher gem. § 55 II RStV: Patrick Gerken
