@@ -91,7 +91,7 @@
             Exakt definieren, was in welcher Version von wo geholt werden soll.
           </div>
           <div>
-            <img width="800px" src="python_comrades.png"></img>
+            <img width="500px" src="python_comrades.png"></img>
           </div>
         </div>
         <div class="handout">
@@ -104,6 +104,12 @@
           <div>
            C-Extensions 
           </div>
+          <pre>
+            [buildout]
+            parts = foo
+            [foo]
+            recipe = zc.recipe.cmmi
+            url = ftp://xmlsoft.org/libxml2/libxml2-git-snapshot.tar.gz
         </div>
         <div class="handout">
             Ich muss C-Klassen kompilieren. Buildout kommt mit CMMI Recipes (configure && make && make install) um sie zu bauen. Es gibt ein Buildout um reproduzierbar alle Python Versionen zu bauen.
@@ -115,9 +121,18 @@
           <div>
             <h2>DRY</h2>
           </div>
+          <pre>
+            [buildout]
+            parts = haproxy
+                    nginx
+                    flask
+            nginx_port = 8080
+            haproxy_port = 8090
+            flask_port = 5000
+            ...
         </div>
         <div class="handout">
-            Ich kann mit spezialiersten "Recipes" oder generischen Template "Recipes" Konfigurationen für nginx, meinen supervisor, meine paster configuration oder meine config.py kreieren. Ports und Hostnamen trage ich an einer Stelle ein und alle Dateien enthalten die neuen Versionen.
+            Ich kann mit spezialierten "Recipes" oder generischen Template "Recipes" Konfigurationen für nginx, meinen supervisor, meine paster configuration oder meine config.py kreieren. Ports und Hostnamen trage ich an einer Stelle ein und alle Dateien enthalten die neuen Versionen.
         </div>
       </li>
       <li class="slide">
@@ -132,7 +147,7 @@
       <li class="slide">
         <h1>Ökosystem 1</h1>
         <div class="slidecontent">
-          <p>z3c.checkversions.</p>
+          <p>z3c.checkversions</p>
           <p>Sind meine Versionen noch aktuell?</p>
         </div>
         <div class="handout">
@@ -143,7 +158,8 @@
         <h1>Ökosystem 2</h1>
         <div class="slidecontent">
           <p>mr.developer</p>
-          <p>Arbeite mit der Bleeding Edge, trunk/master, ohne auszubluten</p>
+          <p>Arbeite mit der bleeding edge, dem trunk oder master.</p>
+          <p>Ohne dabei auszubluten</p>
         </div>
         <div class="handout">
           Mit mr.developer bin ich in der Lage für einzelne Eggs meine Source repositories anzugeben und entweder über die Buildout Konfiguration, oder ein Kommandozeilentool einzelne Source Checkouts zu aktivieren, oder zu deaktivieren.
@@ -154,7 +170,7 @@
         <h1>Ökosystem 3</h1>
         <div class="slidecontent">
           <p>zest.releaser</p>
-          <p>Release in style.</p>
+          <p>Release in style</p>
         </div>
         <div class="handout">
           Der zest.releaser ist eigentlich für Eggs gedacht. Er hilft, saubere Releases zu machen. Er vereinfacht es, Changenotes zu vervollständigen, Versionen zu aktualisieren, Zeitstempel für die Change Notes zu setzen, die richtige Version in Code Repo zu taggen, und bereitet den trunk/master für die nächste Version vor.
