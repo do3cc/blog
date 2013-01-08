@@ -72,9 +72,13 @@
         <div class="slidecontent">
           <div>
             Definieren, welche Eggs installiert werden sollen.
-          </div><div>
-            <img src="http://gifsforum.com/images/image/o%20rly/grand/orlyorly.jpg" alt="O RLY"></img>
+          </div>
+          <div>
+            <p>
+              <img src="http://gifsforum.com/images/image/o%20rly/grand/orlyorly.jpg" alt="O RLY"></img>
+            </p><p>
             <small><a href="http://gifsforum.com">gifsforum.com</a></small>
+          </p>
           </div>
         </div>
         <div class="handout">
@@ -84,13 +88,14 @@
         <h1>Was macht Buildout 2</h1>
         <div class="slidecontent">
           <div>
-            Mein Egg benötigt weitere Eggs. Buildout löst die Abhängigkeiten auf. Ich kann, wenn ich will, genau definieren, welche Versionen ich haben möchte.
+            Exakt definieren, was in welcher Version von wo geholt werden soll.
           </div>
           <div>
-            <img src="python_comrades.png"></img>
+            <img width="800px" src="python_comrades.png"></img>
           </div>
         </div>
         <div class="handout">
+            Mein Egg benötigt weitere Eggs. Buildout löst die Abhängigkeiten auf. Ich kann, wenn ich will, genau definieren, welche Versionen ich haben möchte.
         </div>
       </li>
       <li class="slide">
@@ -108,7 +113,7 @@
         <h1>Was macht Buildout 4</h1>
         <div class="slidecontent">
           <div>
-            <h1>DRY</h1>
+            <h2>DRY</h2>
           </div>
         </div>
         <div class="handout">
@@ -219,6 +224,14 @@
             <li><a href="http://pypi.python.org/pypi/djangorecipe">djangorecipe</a></li>
           </ul>
 
+        </div>
+        <div class="handout">
+        </div>
+      </li>
+      <li class="slide">
+        <h1>Vielen Dank!</h1>
+        <div class="slidecontent">
+          Wer hat noch Fragen?
         </div>
         <div class="handout">
         </div>
