@@ -65,7 +65,7 @@
           </div>
       </li>
       </div>
-      <div class="handout">
+      <div class="notes">
       </div>
       <li class="slide">
         <h1>Was macht Buildout 1</h1>
@@ -81,7 +81,7 @@
           </p>
           </div>
         </div>
-        <div class="handout">
+        <div class="notes">
         </div>
       </li>
       <li class="slide">
@@ -94,7 +94,7 @@
             <img width="500px" src="python_comrades.png"></img>
           </div>
         </div>
-        <div class="handout">
+        <div class="notes">
             Mein Egg benötigt weitere Eggs. Buildout löst die Abhängigkeiten auf. Ich kann, wenn ich will, genau definieren, welche Versionen ich haben möchte.
         </div>
       </li>
@@ -111,7 +111,7 @@
   recipe = zc.recipe.cmmi
   url = ftp://xmlsoft.org/libxml2/libxml2-git-snapshot.tar.gz
         </div>
-        <div class="handout">
+        <div class="notes">
             Ich muss C-Klassen kompilieren. Buildout kommt mit CMMI Recipes (configure && make && make install) um sie zu bauen. Es gibt ein Buildout um reproduzierbar alle Python Versionen zu bauen.
         </div>
       </li>
@@ -131,7 +131,7 @@
   flask_port = 5000
   ...
         </div>
-        <div class="handout">
+        <div class="notes">
             Ich kann mit spezialierten "Recipes" oder generischen Template "Recipes" Konfigurationen für nginx, meinen supervisor, meine paster configuration oder meine config.py kreieren. Ports und Hostnamen trage ich an einer Stelle ein und alle Dateien enthalten die neuen Versionen.
         </div>
       </li>
@@ -140,7 +140,7 @@
         <div class="slidecontent">
           Grosses Ökosystem
         </div>
-        <div class="handout">
+        <div class="notes">
           Rund um Plone gibt es Ökosystem das die Pluginarchtektur von Buildout nutzt, um sie zu erweitern.
         </div>
       </li>
@@ -150,7 +150,7 @@
           <p>z3c.checkversions</p>
           <p>Sind meine Versionen noch aktuell?</p>
         </div>
-        <div class="handout">
+        <div class="notes">
           Wenn ich alle Versionen auf eine spezifische Version "gepinnt" habe, ist meine Installation anhand des Buildouts weitgehend reproduzierbar. Wenn ich neuere Versionen möchte bin ich aufgeschmissen. Ausser ich verwende z3c.checkversions. Damit kann ich relativ einfach für alle dependencies prüfen, ob es neuere Versionen gibt.
         </div>
       </li>
@@ -161,7 +161,7 @@
           <p>Arbeite mit der bleeding edge, dem trunk oder master.</p>
           <p>Ohne dabei auszubluten</p>
         </div>
-        <div class="handout">
+        <div class="notes">
           Mit mr.developer bin ich in der Lage für einzelne Eggs meine Source repositories anzugeben und entweder über die Buildout Konfiguration, oder ein Kommandozeilentool einzelne Source Checkouts zu aktivieren, oder zu deaktivieren.
           Wenn man sich darauf einigt, kann man über die richtige Verwaltung Releases planen. Erst wenn alle Source Checkouts im Buildout deaktiviert wurden, das heisst es wurden neue fertige Eggs dafür gebaut und deren Version eingetragen, wird ein neues Release deployed.
         </div>
@@ -172,7 +172,7 @@
           <p>zest.releaser</p>
           <p>Release in style</p>
         </div>
-        <div class="handout">
+        <div class="notes">
           Der zest.releaser ist eigentlich für Eggs gedacht. Er hilft, saubere Releases zu machen. Er vereinfacht es, Changenotes zu vervollständigen, Versionen zu aktualisieren, Zeitstempel für die Change Notes zu setzen, die richtige Version in Code Repo zu taggen, und bereitet den trunk/master für die nächste Version vor.
           Mit zest.releaser kann man aber beliebige Code repositories releasen, Hauptsache es gibt irgendwo eine Datei mit Versionsinfos und eine Datei für die Changes. Nur auf Pypi kommt man damit nicht. Mit den beiden Konventionen kann man relativ einfach fertige Pakete von Buildouts schnüren. Für ein gutes Gefühl bei einem sauberen Deployment.
         </div>
@@ -188,7 +188,7 @@
   eggs = fabric
           </pre>
         </div>
-        <div class="handout">
+        <div class="notes">
           Buildout alleine macht gar nicht so viel. Es liefert intern viele API Methoden für die "Recipes", aber Buildout an sich ist nur ein ConfigParser System mit Variablen und einigen globalen Parametern für die anderen Recipes. Die Funktionalität kommt mit den "Recipes" von denen Buildout selbst einige mitbringt. Das Beispiel auf diesem Slide ist installiert ein Egg.
         </div>
       </li>
@@ -211,7 +211,7 @@
   zc.recipe.egg = 1.3.2
           </pre>
         </div>
-        <div class="handout">
+        <div class="notes">
           Dieses Buildout ist schon ein wenig strenger. Alles ist genau gepinnt, per Parameter wird gesagt, das nix ungepinnt gebaut werden darf.
           So eine Buildout lege ich meinem Code Repository ein, und ich kann ziemlich sicher sein, das jemand das System so testen kann.
         </div>
@@ -221,7 +221,7 @@
         <div class="slidecontent">
           <img src="modular.png" width="800px" />
         </div>
-        <div class="handout">
+        <div class="notes">
           Wenn das System komplexer wird, verteilen wir die Konfiguration eben auf mehrere Dateien. In base definieren wir das Grundsystem, in versions pinnen wir die richtigen Versionen, KGS ist ein link auf eine URL unter der wir (hoffentlich) ein "Known Good Set" an Versionspinnings für das Basissystem erhalten. Wir wollen ja nicht alles selbst machen. Darunter sind die Anpassungen an die jeweiligen Umgebungen. Debug mode für Entwicklung und Tests, die passenden Ports und Resource URLs für die Produktion und Backup und Maintenance Scripte.
         </div>
       </li>
@@ -240,7 +240,7 @@
           </ul>
 
         </div>
-        <div class="handout">
+        <div class="notes">
         </div>
       </li>
       <li class="slide">
@@ -248,7 +248,7 @@
         <div class="slidecontent">
           Wer hat noch Fragen?
         </div>
-        <div class="handout">
+        <div class="notes">
         </div>
       </li>
     </ol>
