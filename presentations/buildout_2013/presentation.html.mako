@@ -105,11 +105,11 @@
            C-Extensions 
           </div>
           <pre>
-            [buildout]
-            parts = foo
-            [foo]
-            recipe = zc.recipe.cmmi
-            url = ftp://xmlsoft.org/libxml2/libxml2-git-snapshot.tar.gz
+  [buildout]
+  parts = foo
+  [foo]
+  recipe = zc.recipe.cmmi
+  url = ftp://xmlsoft.org/libxml2/libxml2-git-snapshot.tar.gz
         </div>
         <div class="handout">
             Ich muss C-Klassen kompilieren. Buildout kommt mit CMMI Recipes (configure && make && make install) um sie zu bauen. Es gibt ein Buildout um reproduzierbar alle Python Versionen zu bauen.
@@ -122,14 +122,14 @@
             <h2>DRY</h2>
           </div>
           <pre>
-            [buildout]
-            parts = haproxy
-                    nginx
-                    flask
-            nginx_port = 8080
-            haproxy_port = 8090
-            flask_port = 5000
-            ...
+  [buildout]
+  parts = haproxy
+          nginx
+          flask
+  nginx_port = 8080
+  haproxy_port = 8090
+  flask_port = 5000
+  ...
         </div>
         <div class="handout">
             Ich kann mit spezialierten "Recipes" oder generischen Template "Recipes" Konfigurationen für nginx, meinen supervisor, meine paster configuration oder meine config.py kreieren. Ports und Hostnamen trage ich an einer Stelle ein und alle Dateien enthalten die neuen Versionen.
@@ -181,12 +181,11 @@
         <h1>Technik</h1>
         <div class="slidecontent">
           <pre>
-            [buildout]
-            parts = fabric
-
-            [fabric]
-            recipe = zc.recipe.egg
-            eggs = fabric
+  [buildout]
+  parts = fabric
+  [fabric]
+  recipe = zc.recipe.egg
+  eggs = fabric
           </pre>
         </div>
         <div class="handout">
@@ -197,19 +196,19 @@
         <h1>Reproduzierbarkeit</h1>
         <div class="slidecontent">
           <pre>
-            [buildout]
-            parts = fabric
-            allow-picked-versions = false
-            versions = versions
-            [fabric]
-            recipe = zc.recipe.egg
-            eggs = Fabric
-            [versions]
-            Fabric = 1.5.1
-            distribute = 0.6.34
-            paramiko = 1.9.0
-            pycrypto = 2.6
-            zc.recipe.egg = 1.3.2
+  [buildout]
+  parts = fabric
+  allow-picked-versions = false
+  versions = versions
+  [fabric]
+  recipe = zc.recipe.egg
+  eggs = Fabric
+  [versions]
+  Fabric = 1.5.1
+  distribute = 0.6.34
+  paramiko = 1.9.0
+  pycrypto = 2.6
+  zc.recipe.egg = 1.3.2
           </pre>
         </div>
         <div class="handout">
