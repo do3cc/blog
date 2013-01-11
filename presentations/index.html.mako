@@ -13,5 +13,5 @@
   <li><p><a href="deform_2011/deform.html">Deform</a></p>
   <p>This is a talk I gave during the <a href="http://de.pycon.org/">PyCon Germany 2011</a>. In german.</p></li>
   <li><p><a href="buildout_2013/presentation.html">Buildout</a></p>
-  <p>This is a talk I gave for the Python usergroup in Munich <a href="http://python-verband.org/community/muenchen"></a>. In german.</p></li>
+  <p>This is a talk I gave for the <a href="http://python-verband.org/community/muenchen">Python usergroup in Munich</a>. In german.</p></li>
 </ul>
