@@ -1,0 +1,36 @@
+title: Dorkbot Munich
+---
+pub_date: 2009-09-15
+---
+author: Patrick Gerken
+---
+twitter_handle: do3cc
+---
+summary: The first Dorkbot meeting. You should have been there.
+---
+body:
+
+So there was the first Dorkbot meeting in Munich, and I have been
+there. It was a very nice event. What surprised me were the many
+artists who are interested in Arduino. This must be good. If
+people with different educational background work together, both can
+learn so much more in a short amount of time.
+
+I presented a project that is nearly implemented and brought some
+sensors to experiment. Together with Jan I tried to get my
+acceleration sensor working. I learned some things,
+but sadly we did not get the sensors working at all. The analog
+reading was too noisy. It was also drifting... In the end I got it
+working at home. At home I tried it on the mac, and it worked
+immediately. Also, at home the Arduino was connected to a mac mini
+which get its power from the mains, while my laptop was running on a
+battery.
+
+At home I also tried to get the motors working. It is amazing how much
+stuff you get done, when you read a bit. Like the [motorshield manual](http://www.ladyada.net/make/mshield/use.html)
+for the Ladyada motorshield.
+
+I hope there is enough interest and a room for the next Dorkbot
+meeting!
+---
+categories: electronics

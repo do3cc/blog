@@ -1,0 +1,14 @@
+[project]
+name = do3ccblog
+url = http://do3.cc
+url_style = absolute
+
+[packages]
+lektor-markdown-highlighter = 0.1
+lektor-atom = 0.1
+lektor-webpack-support = 0.1
+
+[servers.prod]
+name = Prod
+default = yes
+target = rsync://blog@do3.cc:///home/blog/blog

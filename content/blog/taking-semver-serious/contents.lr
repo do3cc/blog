@@ -1,0 +1,30 @@
+title: Taking semver serious?
+---
+author: Patrick Gerken
+---
+body:
+
+According to [semver](http://semver.org), you should increase your major version (*x*.y.z) when you change your API in a non backwards compatible way.
+What I changed in plone.testing was handling of mistakes. The old version of plone. testing did not see when plone.testing consumers made mistakes that break test isolation. The new version throws exceptions in these case.
+Trying out these changes with the Plone core revealed lots of cases where plone packages use plone.testing in wrong ways. You will get test failures with the new version of plone.testing.
+
+So, even though this is documented sloppily, mostly not at all, thrown exceptions should be considered part of the API. There are exceptions where you want to react in some way, maybe even recover, so it is important to know, what Exceptions to except and when. Since this behaviour changed, and (test) code that was working flawlessly doesn't with the new version I made backwards incompatible changes to the API.
+
+I wanted to leave it like that, but Gil kept bugging me on github.
+
+So if I want to take the semver conventions serious, I should fix that. Since one should not delete old versions, or even *CHANGE* them after the fact, I decided to make two new releases:
+
+- 4.2.1 is actually nearly the same as 4.1.0, with notes about the why. [plone.testing 4.2.1](https://pypi.python.org/pypi/plone.testing/4.2.1#id8)
+- 5.0.0 is actually 4.2.0, again with notes. [plone.testing 5.0.0](https://pypi.python.org/pypi/plone.testing/5.0.0#id8)
+
+Also, I created a branch 4.2.x_dead(_1).
+The changes for 4.2.1 did not belong into the 4.1.x branch, neither in the master branch.
+Creating a 4.2.x release from the 4.1.x branch would be awkward, because 4.2.0 and 4.2.1 would not have these minor changes. So in effect I burned the possibility to ever use a 4.2.x version of plone.testing. Luckily version numbers are cheap.
+
+I do take semver serious. The tooling is not working well yet, but our CI system already does try to update all packages the newest patch version and see if tests still pass. z3c.checkversions needs some improvements for this to work reliably, but the CI tooling is already in place. This is important if you want to be able to keep your production system up to date and if you want upgrades to be cheap. The earlier you find out about potential problems, the cheaper the fix is. Imagine that you have 20 projects, all using package X. One day you come into the office, for all projects, the tests with newest patch versions started to fail, and all fail somewhere in package X. You notice you used the API wrongly. Because you know it is broken in all projects, you quickly fix it in all packages at once.  Now imagine, you would not run tests with the newest patch versions. Today you notice the problem in the 2 projects you are working on today. In 5 Months you attempt an upgrade of another big customer project and you have lots of issues. One is because of package X, but you already forgot how to solve this 5 monts ago. You need to debug. What took you 20 * 5 minutes, or 1 * 30 minutes if you are good with unix tools, now takes 2 hours of debugging for just one project.
+---
+pub_date: 2016-02-16
+---
+summary: Gil Forcada Codinachs pointed out that my release of plone.testing with its changes as 4.2.0 is not following semver conventions. I wasn't sure at first.
+---
+twitter_handle: do3cc

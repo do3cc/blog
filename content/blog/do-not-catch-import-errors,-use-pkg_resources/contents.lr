@@ -1,0 +1,86 @@
+title: Do not catch import errors, use pkg_resources
+---
+pub_date: 2010-08-20
+---
+author: Patrick Gerken
+---
+twitter_handle: do3cc
+---
+summary:
+
+A common solution to handle optional dependencies is a try except wrapper around an import.
+Cleaning a loaded gun is not common. But both have in common that you can easily shoot yourself in your foot.
+See here how to handle optional dependencies without risking to shoot yourself.
+---
+body:
+
+After debugging a funny problem in tests which came from Circular
+Imports that got eaten, let me show you how you can test, if some
+package is available, and how you can test, if that package is new
+enough:
+
+
+So, this is a common snippet:
+
+```python
+try:
+    import Products.LinguaPlone
+except ImportError:
+    HAS_LINGUA_PLONE = False
+else:
+    HAS_LINGUA_PLONE = True
+```
+
+That might trigger circular import exceptions. It will not always fail, depending
+on what gets imported first. The circular import gets caught by the "except ImportError:" line. So you will not see an exception here, but in some other funny place. 
+Good luck debugging that.
+
+Another thing that I see sometimes is a check to implement backward compatibility
+
+```
+try:
+    from foo import new_thing
+except ImportError:
+    OLD_FOO = True
+else:
+    OLD_FOO = False
+
+if OLD_FOO:
+    def new_thing(something):
+    return something + 'cool'
+```
+
+This can sometimes trigger ImportErrors and it does not show its intention like it could.
+
+pkg_resources has an API which can help you to clarify things:
+
+```
+import pkg_resources
+try:
+    pkg_resources.get_distribution('Products.LinguaPlone>=4.0.0')
+except pkg_resources.DistributionNotFound:
+    HAS_LINGUA_PLONE = False
+    HAS_CURRENT_LINGUA_PLONE = False
+except pkg_resources.VersionConflict:
+    HAS_LINGUA_PLONE = True
+    HAS_CURRENT_LINGUA_PLONE = False
+else:
+    HAS_LINGUA_PLONE = True
+    HAS_CURRENT_LINGUA_PLONE = True
+````
+
+Now, that is a bit more verbose, but
+
+- It avoids hideous ImportErrors
+- We don't try to import things and can't trigger circular exceptions
+- It spells out its dependencies more clearly
+- You can see in the code which version is needed for the workaround
+- The chance that totally outdated workarounds will get removed is bigger.
+- If someone sees a try: import, they most probably do not know for
+  which version it was necessary. On the other hand, if they see the
+  version requirement in plain code, they might have an idea that this
+  is a test for a VERY outdated version of a dependency and might decide
+  to delete it, since the package does not support the old version in
+  other parts of the code anyway.
+---
+categories: python

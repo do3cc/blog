@@ -1,0 +1,37 @@
+title: Better debugging with pdbpp
+---
+pub_date: 2011-01-11
+---
+author: Patrick Gerken
+---
+twitter_handle: do3cc
+---
+body:
+
+A short while ago I found out about an alternative to ipdb, [pdbpp](http://pypi.python.org/pypi/pdbpp/).
+among other features pdbpp offers, tab completion, syntax highlighting better code display (sticky mode).
+It extends pdb so `import pdb;pdb.set_trace()` still works.
+
+Sadly, there is a single thing one has to do to make it work with zope.
+When pdb fires up, it loads some third party tools, one of them being pyrepl.
+Pyrepl tries to register some signal handlers and this is usually impossible in your code because you are just in a simple thread where this is forbidden.
+You will get the wrong error message:
+
+[AttributeError: UnixConsole instance has not attribute 'old_sigwinch'](http://www.blogger.com/goog_530477067)
+
+
+To get around this issue, create a file in your home directory named .fancycompleterrc.py
+and add the following content:
+
+```python
+from fancycompleter import DefaultConfig
+
+class Config(DefaultConfig):
+    prefer_pyrepl = False
+```
+
+Pdbpp uses the fancycompleter for tab completion and we change the preferences here, so that pyrepl won't be used any longer.
+---
+summary: pdb is a fast tool for debugging, but a bit basic. ipdb has a lot of features but can be very slow if you just want to step out of the pdb session. Pdbpp is a nice solution in the middle of the road.
+---
+categories: python
