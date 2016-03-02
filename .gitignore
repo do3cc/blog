@@ -1,8 +1,8 @@
 _site/
 blogofile/
-*.pyc# On branch master
 bin/
-bla/
 include/
 lib/
 local/
+webpack/.npm/
+webpack/node_modules/
