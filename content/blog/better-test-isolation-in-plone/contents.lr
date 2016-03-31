@@ -4,32 +4,32 @@ author: Patrick Gerken
 ---
 body:
 
-Thanks to Martin Aspeli, we finally have tests with proper test isolation.
+Thanks to Martin Aspeli, we finally have tests with proper test isolation.<br/>
 Unfortunately, it is still easy to break that isolation.
 
-Functional tests are fast tests, because they reuse the transaction machinery for cleaning up. After each test, a `transaction.abort()` will make sure that all your changes get wiped.
-Functional tests wrap the database with a DemoStorage which gets torn down between each test. These functional tests are especially important when you want to make zope.testbrowser tests or when you want to test things that only happen on commits, like updates to the catalog.
-Now, if you decide to call `transaction.commit()` by yourself in a a functional test, the `transaction.abort()` cannot abort what you changed before your `transaction.commit()`. Congratulations, you broke the test isolation.
-In plone.testing 4.2.0, functional tests monkey patch the `transaction.commit()` method and will throw an exception with a helpful error message. So you see immediately if your tests break isolation.
+Integration tests are fast tests, because they reuse the transaction machinery for cleaning up. After each test, a `transaction.abort()` will make sure that all your changes get wiped away.
+Functional tests wrap the database with a DemoStorage which gets torn down between each test. These functional tests are important when you want to make zope.testbrowser tests or when you want to test things that only happen on commits, like updates to the catalog.
+Now, if you decide to call `transaction.commit()` by yourself in an integration test, the `transaction.abort()` cannot abort what you changed before your `transaction.commit()`. Congratulations, you broke the test isolation.
+In plone.testing 5.0.0, integration tests monkey patch the `transaction.commit()` method and will throw an exception with a helpful error message. So you see immediately if your tests break isolation.
 
-Plone.app.testing has to do a lot of monkey patching to achieve test isolation.<br /> 
-ZopeTestCase has to do a lot of monkey patching, to achieve test isolation.<br />
-They patch different things. When ZopeTestCase does the monkey patching, the plone.app.testing patches stop working properly. Unfortunately,  no error gets triggered, but every functional test works against the same database and not the DemoStorage wrapper. In `plone.testing` 4.2.0 plone.testing notices this and throws an exception with an Exception, explaining what is going wrong.
+Plone.app.testing has to do a lot of monkey patching to isolate tests.
 
-If you want to use these features, you have to pin plone.testing by yourself. It might take a bit of time until plone.testing 4.2.0 is in the official version list of Plone. Both changes break quite a few tests in various Plone packages.
+ZopeTestCase has to do a lot of monkey patching to isolate tests.
+
+They patch different things. When ZopeTestCase does the monkey patching, the plone.app.testing patches stop working properly. Unfortunately,  no error gets triggered, but every functional test works against the same database and not the DemoStorage wrapper. In `plone.testing` 5.0.0 plone.testing notices this and throws an exception with an Exception, explaining what is going wrong.
+
+If you want to use these features, you have to pin plone.testing by yourself. It might take a bit of time until plone.testing 5.0.0 is in the official version list of Plone. Both changes break a few tests in various Plone packages.
 
 If you want to help with this. [Test Isolation Failures](https://github.com/plone/Products.CMFPlone/issues/447) lists the packages that try to commit things in Integration tests.
 [PR for newer zope.testruner](https://github.com/plone/buildout.coredev/pull/155) lists the packages that mix plone.app.testing with ZopeTestCase.
 
 If you mixed up functional and integration tests in the past, the [Plone Training manual](http://training.plone.org)  has a summary on [tests](http://training.plone.org/5/testing.html).
 
-Go use plone.testing 4.2.0!
-
-
+Go use plone.testing 5.0.0!
 ---
 categories: plone
 ---
-pub_date: 2016-02-18
+pub_date: 2016-04-01
 ---
 summary:
 
