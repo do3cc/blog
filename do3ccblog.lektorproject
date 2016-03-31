@@ -11,4 +11,4 @@ lektor-webpack-support = 0.1
 [servers.prod]
 name = Prod
 default = yes
-target = rsync://blog@do3.cc:///home/blog/blog
+target = ghpages://do3cc/blog?cname=do3.cc
