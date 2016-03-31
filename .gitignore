@@ -6,3 +6,4 @@ lib/
 local/
 webpack/.npm/
 webpack/node_modules/
+assets/static/gen/
