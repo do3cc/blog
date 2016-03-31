@@ -1,0 +1,65 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Better test isolation in Plone — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  
+  <div class="blog-post">
+  
+    <h2>Better test isolation in Plone</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/do3cc">Patrick Gerken</a>
+    
+    on 2016-04-01
+  </p>
+  <p>Thanks to Martin Aspeli, we finally have tests with proper test isolation.<br/>
+Unfortunately, it is still easy to break that isolation.</p>
+<p>Integration tests are fast tests, because they reuse the transaction machinery for cleaning up. After each test, a <code>transaction.abort()</code> will make sure that all your changes get wiped away.
+Functional tests wrap the database with a DemoStorage which gets torn down between each test. These functional tests are important when you want to make zope.testbrowser tests or when you want to test things that only happen on commits, like updates to the catalog.
+Now, if you decide to call <code>transaction.commit()</code> by yourself in an integration test, the <code>transaction.abort()</code> cannot abort what you changed before your <code>transaction.commit()</code>. Congratulations, you broke the test isolation.
+In plone.testing 5.0.0, integration tests monkey patch the <code>transaction.commit()</code> method and will throw an exception with a helpful error message. So you see immediately if your tests break isolation.</p>
+<p>Plone.app.testing has to do a lot of monkey patching to isolate tests.</p>
+<p>ZopeTestCase has to do a lot of monkey patching to isolate tests.</p>
+<p>They patch different things. When ZopeTestCase does the monkey patching, the plone.app.testing patches stop working properly. Unfortunately,  no error gets triggered, but every functional test works against the same database and not the DemoStorage wrapper. In <code>plone.testing</code> 5.0.0 plone.testing notices this and throws an exception with an Exception, explaining what is going wrong.</p>
+<p>If you want to use these features, you have to pin plone.testing by yourself. It might take a bit of time until plone.testing 5.0.0 is in the official version list of Plone. Both changes break a few tests in various Plone packages.</p>
+<p>If you want to help with this. <a href="https://github.com/plone/Products.CMFPlone/issues/447">Test Isolation Failures</a> lists the packages that try to commit things in Integration tests.
+<a href="https://github.com/plone/buildout.coredev/pull/155">PR for newer zope.testruner</a> lists the packages that mix plone.app.testing with ZopeTestCase.</p>
+<p>If you mixed up functional and integration tests in the past, the <a href="http://training.plone.org">Plone Training manual</a>  has a summary on <a href="http://training.plone.org/5/testing.html">tests</a>.</p>
+<p>Go use plone.testing 5.0.0!</p>
+
+    <div data-social-share-privacy="true" data-uri="/blog/2016/04/92/better-test-isolation-in-plone/" data-title="Better test isolation in Plone"></div>
+  </div>
+
+  <div class="shariff">xxx</div>
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>

@@ -1,0 +1,108 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Do not catch import errors, use pkg_resources — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  
+  <div class="blog-post">
+  
+    <h2>Do not catch import errors, use pkg_resources</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/do3cc">Patrick Gerken</a>
+    
+    on 2010-08-20
+  </p>
+  <p>After debugging a funny problem in tests which came from Circular
+Imports that got eaten, let me show you how you can test, if some
+package is available, and how you can test, if that package is new
+enough:</p>
+<p>So, this is a common snippet:</p>
+<div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">Products.LinguaPlone</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">HAS_LINGUA_PLONE</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">HAS_LINGUA_PLONE</span> <span class="o">=</span> <span class="bp">True</span>
+</pre></div>
+<p>That might trigger circular import exceptions. It will not always fail, depending
+on what gets imported first. The circular import gets caught by the "except ImportError:" line. So you will not see an exception here, but in some other funny place. 
+Good luck debugging that.</p>
+<p>Another thing that I see sometimes is a check to implement backward compatibility</p>
+<pre><code>try:
+    from foo import new_thing
+except ImportError:
+    OLD_FOO = True
+else:
+    OLD_FOO = False
+
+if OLD_FOO:
+    def new_thing(something):
+    return something + 'cool'
+</code></pre>
+<p>This can sometimes trigger ImportErrors and it does not show its intention like it could.</p>
+<p>pkg_resources has an API which can help you to clarify things:</p>
+<pre><code>import pkg_resources
+try:
+    pkg_resources.get_distribution('Products.LinguaPlone&gt;=4.0.0')
+except pkg_resources.DistributionNotFound:
+    HAS_LINGUA_PLONE = False
+    HAS_CURRENT_LINGUA_PLONE = False
+except pkg_resources.VersionConflict:
+    HAS_LINGUA_PLONE = True
+    HAS_CURRENT_LINGUA_PLONE = False
+else:
+    HAS_LINGUA_PLONE = True
+    HAS_CURRENT_LINGUA_PLONE = True
+`
+</code></pre>
+<p>Now, that is a bit more verbose, but</p>
+<ul>
+<li>It avoids hideous ImportErrors</li>
+<li>We don't try to import things and can't trigger circular exceptions</li>
+<li>It spells out its dependencies more clearly</li>
+<li>You can see in the code which version is needed for the workaround</li>
+<li>The chance that totally outdated workarounds will get removed is bigger.</li>
+<li>If someone sees a try: import, they most probably do not know for
+which version it was necessary. On the other hand, if they see the
+version requirement in plain code, they might have an idea that this
+is a test for a VERY outdated version of a dependency and might decide
+to delete it, since the package does not support the old version in
+other parts of the code anyway.</li>
+</ul>
+
+    <div data-social-share-privacy="true" data-uri="/blog/2010/08/232/do-not-catch-import-errors,-use-pkg_resources/" data-title="Do not catch import errors, use pkg_resources"></div>
+  </div>
+
+  <div class="shariff">xxx</div>
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>

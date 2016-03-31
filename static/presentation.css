@@ -1,0 +1,31 @@
+div#header {
+    background-color: #329FD7;
+}
+
+div#header h1 {
+    padding-left: 1px;
+    padding-top: 24px;
+    color: #eee;
+}
+
+div#footer {
+    background-color: #329FD7;
+    color: #eee;
+}
+
+:link, *:visited {
+}
+
+.slide h1 {
+    color: #eee;
+    background: none;
+}
+
+#controls #navLinks a {
+    background: none;
+    color: #eee;
+}
+
+#controls #navLinks #jumplist {
+    color: #329FD7;
+}

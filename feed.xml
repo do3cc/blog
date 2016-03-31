@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">do3cc blog</title>
+  <id>urn:uuid:3dea200e-c32c-377d-a59d-2d5294c23d66</id>
+  <updated>2016-04-01T00:00:00Z</updated>
+  <link href="http://do3.cc/blog/" />
+  <link href="http://do3.cc/feed.xml" rel="self" />
+  <author>
+    <name></name>
+  </author>
+  <generator uri="https://github.com/ajdavis/lektor-atom" version="0.1">Lektor Atom Plugin</generator>
+  <entry xml:base="http://do3.cc/blog/2016/04/92/better-test-isolation-in-plone/">
+    <title type="text">Better test isolation in Plone</title>
+    <id>urn:uuid:d318649c-f81e-374c-8717-917cc832f139</id>
+    <updated>2016-04-01T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2016/04/92/better-test-isolation-in-plone/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;Thanks to Martin Aspeli, we finally have tests with proper test isolation.&lt;br/&gt;
+Unfortunately, it is still easy to break that isolation.&lt;/p&gt;
+&lt;p&gt;Integration tests are fast tests, because they reuse the transaction machinery for cleaning up. After each test, a &lt;code&gt;transaction.abort()&lt;/code&gt; will make sure that all your changes get wiped away.
+Functional tests wrap the database with a DemoStorage which gets torn down between each test. These functional tests are important when you want to make zope.testbrowser tests or when you want to test things that only happen on commits, like updates to the catalog.
+Now, if you decide to call &lt;code&gt;transaction.commit()&lt;/code&gt; by yourself in an integration test, the &lt;code&gt;transaction.abort()&lt;/code&gt; cannot abort what you changed before your &lt;code&gt;transaction.commit()&lt;/code&gt;. Congratulations, you broke the test isolation.
+In plone.testing 5.0.0, integration tests monkey patch the &lt;code&gt;transaction.commit()&lt;/code&gt; method and will throw an exception with a helpful error message. So you see immediately if your tests break isolation.&lt;/p&gt;
+&lt;p&gt;Plone.app.testing has to do a lot of monkey patching to isolate tests.&lt;/p&gt;
+&lt;p&gt;ZopeTestCase has to do a lot of monkey patching to isolate tests.&lt;/p&gt;
+&lt;p&gt;They patch different things. When ZopeTestCase does the monkey patching, the plone.app.testing patches stop working properly. Unfortunately,  no error gets triggered, but every functional test works against the same database and not the DemoStorage wrapper. In &lt;code&gt;plone.testing&lt;/code&gt; 5.0.0 plone.testing notices this and throws an exception with an Exception, explaining what is going wrong.&lt;/p&gt;
+&lt;p&gt;If you want to use these features, you have to pin plone.testing by yourself. It might take a bit of time until plone.testing 5.0.0 is in the official version list of Plone. Both changes break a few tests in various Plone packages.&lt;/p&gt;
+&lt;p&gt;If you want to help with this. &lt;a href=&quot;https://github.com/plone/Products.CMFPlone/issues/447&quot;&gt;Test Isolation Failures&lt;/a&gt; lists the packages that try to commit things in Integration tests.
+&lt;a href=&quot;https://github.com/plone/buildout.coredev/pull/155&quot;&gt;PR for newer zope.testruner&lt;/a&gt; lists the packages that mix plone.app.testing with ZopeTestCase.&lt;/p&gt;
+&lt;p&gt;If you mixed up functional and integration tests in the past, the &lt;a href=&quot;http://training.plone.org&quot;&gt;Plone Training manual&lt;/a&gt;  has a summary on &lt;a href=&quot;http://training.plone.org/5/testing.html&quot;&gt;tests&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Go use plone.testing 5.0.0!&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="http://do3.cc/blog/2012/09/264/debugging-zcrelations-/">
+    <title type="text">x</title>
+    <id>urn:uuid:92ba17b8-00e7-3421-9ebc-ae31e345c471</id>
+    <updated>2012-09-20T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2012/09/264/debugging-zcrelations-/" />
+    <author>
+      <name></name>
+    </author>
+  </entry>
+  <entry xml:base="http://do3.cc/blog/2012/09/264/debugging-zcrelations---broken-btrees/">
+    <title type="text">Debugging zc.relations / Broken BTrees</title>
+    <id>urn:uuid:44b4148e-5e3a-3c75-91c0-d7d0babc2687</id>
+    <updated>2012-09-20T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2012/09/264/debugging-zcrelations---broken-btrees/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;Lately we encountered a serious problem with a site.
+The site uses Dexterity and our content objects have relationfields.
+In the beginning of the Project, we had a dependency on Products.LinguaPlone but removed it later in favor of plone.multilingual.&lt;/p&gt;
+&lt;p&gt;Sometimes, removing a product is hard, especially if persistent utilites are involved. Luckily, one can remove persistent utilities with wildcard.fixpersistentutiliries.&lt;/p&gt;
+&lt;p&gt;So we thought we are pretty safe now, but after a while the following traceback crept up:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1348150731.020&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;336585243806&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;somesite&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;edit&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Traceback&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;innermost&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;last&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Publish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;126&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publish&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;77&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mapply&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Publish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;46&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;call_object&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__call__&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;54&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dexterity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;browser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;edit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;52&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fieldsets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extensible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;59&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;patch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GroupForm_update&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;138&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;99&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;315&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__call__&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;170&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__call__&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dexterity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;browser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;edit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handleApply&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;119&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applyChanges&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notify&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dispatch&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;136&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;321&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;585&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;objectEventNotify&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;136&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;registry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;321&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;585&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;subscribers&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relationfield&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;82&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updateRelations&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;546&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unindex&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;556&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unindex_doc&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;621&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_remove&lt;/span&gt;
+&lt;span class=&quot;ne&quot;&gt;KeyError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InterfaceClass&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;wildcard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fixpersistentutilities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classfactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IFakeInterface&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In that line of code, zc.relation tries to extract the key &lt;code&gt;&amp;lt;InterfaceClass wildcard.fixpersistentutilities.classfactory.IFakeInterface&amp;gt;&lt;/code&gt; from an OOBtree.
+That OOBTree claimed that the OOBTree does not contain that key, but when iterating over the keys of the OOBTree, the key was right there.&lt;/p&gt;
+&lt;p&gt;After a lot of reading the wrong docs (I assumed that the key really does not exist in the BTree and assumed I found a bug in zc.relation, thus trying to understand zc.relation internals first) I reread the documentation of BTrees itself, especially the part about &lt;a href=&quot;http://www.zodb.org/documentation/guide/modules.html#total-ordering-and-persistence&quot;&gt;Total Ordering and Persistence&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;It turned out that the IFakeInterface from above was not in the correct order. I used the check() method from BTree.check on the btree to confirm that.&lt;/p&gt;
+&lt;p&gt;Luckily, there is a fast way to repair a BTree so I went on to fix it:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;./&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;OPlone&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;zope.component&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getUtility&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;zc.relation.interfaces&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ICatalog&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getUtility&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ICatalog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btree&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_name_TO_mapping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;to_interfaces_flattened&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_name_TO_mapping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;to_interfaces_flattened&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__class__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Creating a copy of the BTree will readd everything in the right order.&lt;/p&gt;
+&lt;p&gt;I am going to improve the error reporting in zc.relation to give a better hint of what might be wrong, but I am not sure of a good way to repair such a problem automatically.&lt;/p&gt;
+&lt;p&gt;Anyway, I hope this helps!&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="http://do3.cc/blog/2011/09/272/security-patch-party-auf-der-pycon-de/">
+    <title type="text">Security Patch Party auf der PyCon DE</title>
+    <id>urn:uuid:388a7c7a-c7f9-34b2-abf3-554f17aad06d</id>
+    <updated>2011-09-29T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2011/09/272/security-patch-party-auf-der-pycon-de/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;Pünktlich zu der deutschen &lt;a href=&quot;http://de.pycon.org/2011/home/&quot;&gt;Python Konferenz in
+Leipzig&lt;/a&gt; wird einer der seltenen
+Security Patches für Plone veröffentlicht.&lt;/p&gt;
+&lt;p&gt;Dieses wurde im Vorfeld angekündigt, damit sich alle Anwender von
+Plone vorbereiten können, um den Patch zeitnah zur Veröffentlichung
+einzuspielen. Wer ganz auf Nummer sicher gehen möchte, fährt seine
+Dienste kurz vor der Veröffentlichung runter, installiert sofort nach
+Veröffentlichung den Patch und fährt danach Plone wieder hoch. Dank
+der guten Vorbereitung durch das Plone Security Team sind diese
+Schritte bei den letzten Patches immer reibungslos verlaufen.&lt;/p&gt;
+&lt;p&gt;Dieses mal findet die Veröffentlichung lustigerweise gegen Ende
+unseres 
+Plone-Tutorials auf der PyCon DE statt. Wir haben uns daher kurzfristig
+dazu entschlossen, im Anschluss an unser Tutorial eine Patch Party zu
+machen. Jeder der auch Plone Seiten patchen muss ist herzlich
+eingeladen, am Dienstag den 4.10. ab etwa 16:45 zu unserer &lt;a href=&quot;http://de.pycon.org/2011/schedule/sessions/13/&quot;&gt;Plone Schulung&lt;/a&gt; zu
+kommen. Dieses Angebot gilt sowohl für alte Hasen die genau wissen was
+sie tun als auch für Neulinge die sich unsicher sind, ob sie den Patch
+ohne Probleme einspielen können. Die alte Hasen können den neuen Hasen
+dann helfen ihre Seiten zu patchen.&lt;/p&gt;
+&lt;p&gt;Falls notwendig erklären wir bis
+17:00, wie man den Patch vorbereiten muss und geben Tipps um zu
+prüfen, ob man beim Patchen mit Problemen rechnen muss. Zudem verraten wir wie wir all die Seiten, die wir auf den verschiedensten Servern betreuen, weitgehend automatisiert patchen.&lt;/p&gt;
+&lt;p&gt;Happy Patching!&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/static/drunken_dog.jpg&quot; alt=&quot;Not this kind of party&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Hier hat jemand Patch Party missverstanden&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="http://do3.cc/blog/2011/06/181/europython-and-pyramid-crud-sprint/">
+    <title type="text">Europython and Pyramid CRUD Sprint</title>
+    <id>urn:uuid:d2387e69-e871-3839-b903-8fc1d514c65c</id>
+    <updated>2011-06-30T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2011/06/181/europython-and-pyramid-crud-sprint/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;When I heard that there will be a Pyramid sprint directly before the
+Europython conference, I knew I have to attend to both events.
+So I did, and after 15 years I visited Italy again.&lt;/p&gt;
+&lt;p&gt;The Italy events began in Bologna, where RedTurtle started to be
+outstanding hosts by picking Gael Pasgrimaud and me up. The sprint,
+which took place in the RedTurtle office in Ferrara, went very well
+and we got a lot of improvements going.  You can read about all the
+details in the &lt;a
+href=&quot;http://blog.redturtle.it/redturtle-blog/pyramid-crud-sprint-summary&quot;&gt;RedTurtle
+Blog&lt;/a&gt;, so I shouldn't repeat myself here.  As I wasn't very familiar
+with the code base, I took care of the outer parts, but I hope it will
+show to be a worthwhile contribution.  RedTurtle was an awesome host,
+not only did they teach me a lot about italian food and conventions, they
+cured me from my coca cola addiction!&lt;/p&gt;
+&lt;p&gt;Europython 2011 was a blast! In average, the talks were more hands on
+than talks at Plone conferences. The talk from which I
+learned the most was the &lt;a
+href=&quot;http://ep2011.europython.eu/conference/talks/pitfalls-of-continuous-deployment&quot;&gt;Pitfalls
+of Continuous deployment&lt;/a&gt; talk by David Cramer, I heartily suggest
+to watch the video of that one.  Another talk you should really have a
+look at is &lt;a
+href=&quot;http://ep2011.europython.eu/conference/talks/how-to-build-complex-web-applications-having-fun&quot;&gt;How
+to build complex web applications having fun&lt;/a&gt; from Andrew
+Mleczko. If I would not have done something similar already, I would
+have had problems following anything else interesting during the day
+because my brain would have been busy imaging what kind of cool things
+I could do, combining Pyramid and Plone. So go watch it!&lt;/p&gt;
+&lt;p&gt;The venue and the organisation was very good. As you maybe have
+noticed, internet wasn't, but I heard the organization team tried a
+number of things to improve that and succeeded some improvements in
+short time. Unfortunately it wasn't enough to get a good internet.
+During the first day, the Europython team made a joke about Italians and
+organizing, but during the conference they proved all prejudice wrong.
+In fact, I was more than glad that they would walk the extra mile and
+get some tickets for the &lt;a href=&quot;http://ep2011.europython.eu/blog/2011/05/18/pyfiorentina-legendary-steak&quot;&gt;PyFiorentina event&lt;/a&gt; even for those who
+actually came too late (Like me). They did all this extra work while organizing
+the conference, and I am not sure I would receive that much attention
+on many other conferences.&lt;/p&gt;
+&lt;p&gt;My setup improved a bit in comparison to my last trips.  Unfortunately
+I did not get my small laptop in time so I was carrying a large brick
+as always. The Europython team organized Italian prepaid sim cards
+with data tariffs, so I always had internet on the phone and used it a
+lot. My phones battery was usually depleted around lunch time.  Due to
+some accident, I ended up with an universal power supply before the
+conference started. I got a thin one, about 1 cm of height with an
+additional usb port. That proved to be really practical. In Bristol I
+was carrying my laptop half open more than once, just to keep my
+mobile phone charging, this time it was always in my laptop bag,
+already connected to my power supply, and whenever I recharged my
+computer, my phone would get its charge too.&lt;/p&gt;
+&lt;p&gt;I'll never to live demos again. While all went well, clicking through
+something takes ages when several hundred people are watching you. I
+started to question my complete Plone talk while moving the mouse or
+watching the page reload, thus I completely lost the timing for the
+joke I was going to give.From some people I got the feedback that I
+should have mentioned more stuff. A full talk about Plone might have
+been in order, since interest was high. Only after the talk I
+realized, that I explained that it is possible to create browser views
+without writing zcml, but I did not mention at all, what to look for
+to find out how! So, if you are curious, look for the dexterity
+manual, it explains it all.&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="http://do3.cc/blog/2011/01/11/better-debugging-with-pdbpp/">
+    <title type="text">Better debugging with pdbpp</title>
+    <id>urn:uuid:c1d03538-1de9-367d-bef1-208d0a39f098</id>
+    <updated>2011-01-11T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2011/01/11/better-debugging-with-pdbpp/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;A short while ago I found out about an alternative to ipdb, &lt;a href=&quot;http://pypi.python.org/pypi/pdbpp/&quot;&gt;pdbpp&lt;/a&gt;.
+among other features pdbpp offers, tab completion, syntax highlighting better code display (sticky mode).
+It extends pdb so &lt;code&gt;import pdb;pdb.set_trace()&lt;/code&gt; still works.&lt;/p&gt;
+&lt;p&gt;Sadly, there is a single thing one has to do to make it work with zope.
+When pdb fires up, it loads some third party tools, one of them being pyrepl.
+Pyrepl tries to register some signal handlers and this is usually impossible in your code because you are just in a simple thread where this is forbidden.
+You will get the wrong error message:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.blogger.com/goog_530477067&quot;&gt;AttributeError: UnixConsole instance has not attribute 'old_sigwinch'&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To get around this issue, create a file in your home directory named .fancycompleterrc.py
+and add the following content:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fancycompleter&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DefaultConfig&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DefaultConfig&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;prefer_pyrepl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pdbpp uses the fancycompleter for tab completion and we change the preferences here, so that pyrepl won't be used any longer.&lt;/p&gt;
+</content>
+  </entry>
+  <entry xml:base="http://do3.cc/blog/2010/08/232/do-not-catch-import-errors,-use-pkg_resources/">
+    <title type="text">Do not catch import errors, use pkg_resources</title>
+    <id>urn:uuid:83dbf910-b98e-3bab-848f-6e6fc2c77aed</id>
+    <updated>2010-08-20T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2010/08/232/do-not-catch-import-errors,-use-pkg_resources/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;After debugging a funny problem in tests which came from Circular
+Imports that got eaten, let me show you how you can test, if some
+package is available, and how you can test, if that package is new
+enough:&lt;/p&gt;
+&lt;p&gt;So, this is a common snippet:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Products.LinguaPlone&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;ne&quot;&gt;ImportError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;HAS_LINGUA_PLONE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;HAS_LINGUA_PLONE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That might trigger circular import exceptions. It will not always fail, depending
+on what gets imported first. The circular import gets caught by the &quot;except ImportError:&quot; line. So you will not see an exception here, but in some other funny place. 
+Good luck debugging that.&lt;/p&gt;
+&lt;p&gt;Another thing that I see sometimes is a check to implement backward compatibility&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;try:
+    from foo import new_thing
+except ImportError:
+    OLD_FOO = True
+else:
+    OLD_FOO = False
+
+if OLD_FOO:
+    def new_thing(something):
+    return something + 'cool'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This can sometimes trigger ImportErrors and it does not show its intention like it could.&lt;/p&gt;
+&lt;p&gt;pkg_resources has an API which can help you to clarify things:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import pkg_resources
+try:
+    pkg_resources.get_distribution('Products.LinguaPlone&amp;gt;=4.0.0')
+except pkg_resources.DistributionNotFound:
+    HAS_LINGUA_PLONE = False
+    HAS_CURRENT_LINGUA_PLONE = False
+except pkg_resources.VersionConflict:
+    HAS_LINGUA_PLONE = True
+    HAS_CURRENT_LINGUA_PLONE = False
+else:
+    HAS_LINGUA_PLONE = True
+    HAS_CURRENT_LINGUA_PLONE = True
+`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, that is a bit more verbose, but&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It avoids hideous ImportErrors&lt;/li&gt;
+&lt;li&gt;We don't try to import things and can't trigger circular exceptions&lt;/li&gt;
+&lt;li&gt;It spells out its dependencies more clearly&lt;/li&gt;
+&lt;li&gt;You can see in the code which version is needed for the workaround&lt;/li&gt;
+&lt;li&gt;The chance that totally outdated workarounds will get removed is bigger.&lt;/li&gt;
+&lt;li&gt;If someone sees a try: import, they most probably do not know for
+which version it was necessary. On the other hand, if they see the
+version requirement in plain code, they might have an idea that this
+is a test for a VERY outdated version of a dependency and might decide
+to delete it, since the package does not support the old version in
+other parts of the code anyway.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry xml:base="http://do3.cc/blog/2009/09/258/dorkbot-munich/">
+    <title type="text">Dorkbot Munich</title>
+    <id>urn:uuid:f575adc9-b59c-3426-ac3e-0e548347cf98</id>
+    <updated>2009-09-15T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2009/09/258/dorkbot-munich/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;So there was the first Dorkbot meeting in Munich, and I have been
+there. It was a very nice event. What surprised me were the many
+artists who are interested in Arduino. This must be good. If
+people with different educational background work together, both can
+learn so much more in a short amount of time.&lt;/p&gt;
+&lt;p&gt;I presented a project that is nearly implemented and brought some
+sensors to experiment. Together with Jan I tried to get my
+acceleration sensor working. I learned some things,
+but sadly we did not get the sensors working at all. The analog
+reading was too noisy. It was also drifting... In the end I got it
+working at home. At home I tried it on the mac, and it worked
+immediately. Also, at home the Arduino was connected to a mac mini
+which get its power from the mains, while my laptop was running on a
+battery.&lt;/p&gt;
+&lt;p&gt;At home I also tried to get the motors working. It is amazing how much
+stuff you get done, when you read a bit. Like the &lt;a href=&quot;http://www.ladyada.net/make/mshield/use.html&quot;&gt;motorshield manual&lt;/a&gt;
+for the Ladyada motorshield.&lt;/p&gt;
+&lt;p&gt;I hope there is enough interest and a room for the next Dorkbot
+meeting!&lt;/p&gt;
+</content>
+  </entry>
+</feed>

@@ -1,0 +1,67 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Better debugging with pdbpp — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  
+  <div class="blog-post">
+  
+    <h2>Better debugging with pdbpp</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/do3cc">Patrick Gerken</a>
+    
+    on 2011-01-11
+  </p>
+  <p>A short while ago I found out about an alternative to ipdb, <a href="http://pypi.python.org/pypi/pdbpp/">pdbpp</a>.
+among other features pdbpp offers, tab completion, syntax highlighting better code display (sticky mode).
+It extends pdb so <code>import pdb;pdb.set_trace()</code> still works.</p>
+<p>Sadly, there is a single thing one has to do to make it work with zope.
+When pdb fires up, it loads some third party tools, one of them being pyrepl.
+Pyrepl tries to register some signal handlers and this is usually impossible in your code because you are just in a simple thread where this is forbidden.
+You will get the wrong error message:</p>
+<p><a href="http://www.blogger.com/goog_530477067">AttributeError: UnixConsole instance has not attribute 'old_sigwinch'</a></p>
+<p>To get around this issue, create a file in your home directory named .fancycompleterrc.py
+and add the following content:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fancycompleter</span> <span class="kn">import</span> <span class="n">DefaultConfig</span>
+
+<span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="n">DefaultConfig</span><span class="p">):</span>
+    <span class="n">prefer_pyrepl</span> <span class="o">=</span> <span class="bp">False</span>
+</pre></div>
+<p>Pdbpp uses the fancycompleter for tab completion and we change the preferences here, so that pyrepl won't be used any longer.</p>
+
+    <div data-social-share-privacy="true" data-uri="/blog/2011/01/11/better-debugging-with-pdbpp/" data-title="Better debugging with pdbpp"></div>
+  </div>
+
+  <div class="shariff">xxx</div>
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>

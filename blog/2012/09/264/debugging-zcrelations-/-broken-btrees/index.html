@@ -1,0 +1,88 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Debugging zc.relations / Broken BTrees — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  <h2>Debugging zc.relations / Broken BTrees</h2>
+  <p>Lately we encountered a serious problem with a site.
+The site uses Dexterity and our content objects have relationfields.
+In the beginning of the Project, we had a dependency on Products.LinguaPlone but removed it later in favor of plone.multilingual.</p>
+<p>Sometimes, removing a product is hard, especially if persistent utilites are involved. Luckily, one can remove persistent utilities with wildcard.fixpersistentutiliries.</p>
+<p>So we thought we are pretty safe now, but after a while the following traceback crept up:</p>
+<div class="highlight"><pre><span></span><span class="mf">1348150731.020</span><span class="o">.</span><span class="mi">336585243806</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">somesite</span><span class="o">/</span><span class="n">edit</span>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">innermost</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">Module</span> <span class="n">ZPublisher</span><span class="o">.</span><span class="n">Publish</span><span class="p">,</span> <span class="n">line</span> <span class="mi">126</span><span class="p">,</span> <span class="ow">in</span> <span class="n">publish</span>
+  <span class="n">Module</span> <span class="n">ZPublisher</span><span class="o">.</span><span class="n">mapply</span><span class="p">,</span> <span class="n">line</span> <span class="mi">77</span><span class="p">,</span> <span class="ow">in</span> <span class="n">mapply</span>
+  <span class="n">Module</span> <span class="n">ZPublisher</span><span class="o">.</span><span class="n">Publish</span><span class="p">,</span> <span class="n">line</span> <span class="mi">46</span><span class="p">,</span> <span class="ow">in</span> <span class="n">call_object</span>
+  <span class="n">Module</span> <span class="n">plone</span><span class="o">.</span><span class="n">z3cform</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">line</span> <span class="mi">70</span><span class="p">,</span> <span class="ow">in</span> <span class="n">__call__</span>
+  <span class="n">Module</span> <span class="n">plone</span><span class="o">.</span><span class="n">z3cform</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">line</span> <span class="mi">54</span><span class="p">,</span> <span class="ow">in</span> <span class="n">update</span>
+  <span class="n">Module</span> <span class="n">plone</span><span class="o">.</span><span class="n">dexterity</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">edit</span><span class="p">,</span> <span class="n">line</span> <span class="mi">52</span><span class="p">,</span> <span class="ow">in</span> <span class="n">update</span>
+  <span class="n">Module</span> <span class="n">plone</span><span class="o">.</span><span class="n">z3cform</span><span class="o">.</span><span class="n">fieldsets</span><span class="o">.</span><span class="n">extensible</span><span class="p">,</span> <span class="n">line</span> <span class="mi">59</span><span class="p">,</span> <span class="ow">in</span> <span class="n">update</span>
+  <span class="n">Module</span> <span class="n">plone</span><span class="o">.</span><span class="n">z3cform</span><span class="o">.</span><span class="n">patch</span><span class="p">,</span> <span class="n">line</span> <span class="mi">30</span><span class="p">,</span> <span class="ow">in</span> <span class="n">GroupForm_update</span>
+  <span class="n">Module</span> <span class="n">z3c</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">line</span> <span class="mi">138</span><span class="p">,</span> <span class="ow">in</span> <span class="n">update</span>
+  <span class="n">Module</span> <span class="n">z3c</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">action</span><span class="p">,</span> <span class="n">line</span> <span class="mi">99</span><span class="p">,</span> <span class="ow">in</span> <span class="n">execute</span>
+  <span class="n">Module</span> <span class="n">z3c</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">button</span><span class="p">,</span> <span class="n">line</span> <span class="mi">315</span><span class="p">,</span> <span class="ow">in</span> <span class="n">__call__</span>
+  <span class="n">Module</span> <span class="n">z3c</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">button</span><span class="p">,</span> <span class="n">line</span> <span class="mi">170</span><span class="p">,</span> <span class="ow">in</span> <span class="n">__call__</span>
+  <span class="n">Module</span> <span class="n">plone</span><span class="o">.</span><span class="n">dexterity</span><span class="o">.</span><span class="n">browser</span><span class="o">.</span><span class="n">edit</span><span class="p">,</span> <span class="n">line</span> <span class="mi">27</span><span class="p">,</span> <span class="ow">in</span> <span class="n">handleApply</span>
+  <span class="n">Module</span> <span class="n">z3c</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="n">line</span> <span class="mi">119</span><span class="p">,</span> <span class="ow">in</span> <span class="n">applyChanges</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">event</span><span class="p">,</span> <span class="n">line</span> <span class="mi">31</span><span class="p">,</span> <span class="ow">in</span> <span class="n">notify</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">event</span><span class="p">,</span> <span class="n">line</span> <span class="mi">24</span><span class="p">,</span> <span class="ow">in</span> <span class="n">dispatch</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">line</span> <span class="mi">136</span><span class="p">,</span> <span class="ow">in</span> <span class="n">subscribers</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">registry</span><span class="p">,</span> <span class="n">line</span> <span class="mi">321</span><span class="p">,</span> <span class="ow">in</span> <span class="n">subscribers</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">adapter</span><span class="p">,</span> <span class="n">line</span> <span class="mi">585</span><span class="p">,</span> <span class="ow">in</span> <span class="n">subscribers</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">event</span><span class="p">,</span> <span class="n">line</span> <span class="mi">32</span><span class="p">,</span> <span class="ow">in</span> <span class="n">objectEventNotify</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">_api</span><span class="p">,</span> <span class="n">line</span> <span class="mi">136</span><span class="p">,</span> <span class="ow">in</span> <span class="n">subscribers</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">registry</span><span class="p">,</span> <span class="n">line</span> <span class="mi">321</span><span class="p">,</span> <span class="ow">in</span> <span class="n">subscribers</span>
+  <span class="n">Module</span> <span class="n">zope</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">adapter</span><span class="p">,</span> <span class="n">line</span> <span class="mi">585</span><span class="p">,</span> <span class="ow">in</span> <span class="n">subscribers</span>
+  <span class="n">Module</span> <span class="n">z3c</span><span class="o">.</span><span class="n">relationfield</span><span class="o">.</span><span class="n">event</span><span class="p">,</span> <span class="n">line</span> <span class="mi">82</span><span class="p">,</span> <span class="ow">in</span> <span class="n">updateRelations</span>
+  <span class="n">Module</span> <span class="n">zc</span><span class="o">.</span><span class="n">relation</span><span class="o">.</span><span class="n">catalog</span><span class="p">,</span> <span class="n">line</span> <span class="mi">546</span><span class="p">,</span> <span class="ow">in</span> <span class="n">unindex</span>
+  <span class="n">Module</span> <span class="n">zc</span><span class="o">.</span><span class="n">relation</span><span class="o">.</span><span class="n">catalog</span><span class="p">,</span> <span class="n">line</span> <span class="mi">556</span><span class="p">,</span> <span class="ow">in</span> <span class="n">unindex_doc</span>
+  <span class="n">Module</span> <span class="n">zc</span><span class="o">.</span><span class="n">relation</span><span class="o">.</span><span class="n">catalog</span><span class="p">,</span> <span class="n">line</span> <span class="mi">621</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_remove</span>
+<span class="ne">KeyError</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">InterfaceClass</span> <span class="n">wildcard</span><span class="o">.</span><span class="n">fixpersistentutilities</span><span class="o">.</span><span class="n">classfactory</span><span class="o">.</span><span class="n">IFakeInterface</span><span class="o">&gt;</span>
+</pre></div>
+<p>In that line of code, zc.relation tries to extract the key <code>&lt;InterfaceClass wildcard.fixpersistentutilities.classfactory.IFakeInterface&gt;</code> from an OOBtree.
+That OOBTree claimed that the OOBTree does not contain that key, but when iterating over the keys of the OOBTree, the key was right there.</p>
+<p>After a lot of reading the wrong docs (I assumed that the key really does not exist in the BTree and assumed I found a bug in zc.relation, thus trying to understand zc.relation internals first) I reread the documentation of BTrees itself, especially the part about <a href="http://www.zodb.org/documentation/guide/modules.html#total-ordering-and-persistence">Total Ordering and Persistence</a>.</p>
+<p>It turned out that the IFakeInterface from above was not in the correct order. I used the check() method from BTree.check on the btree to confirm that.</p>
+<p>Luckily, there is a fast way to repair a BTree so I went on to fix it:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="o">./</span><span class="nb">bin</span><span class="o">/</span><span class="n">instance</span> <span class="o">-</span><span class="n">OPlone</span> <span class="n">debug</span>
+
+<span class="o">...</span> <span class="kn">from</span> <span class="nn">zope.component</span> <span class="kn">import</span> <span class="n">getUtility</span>
+<span class="o">...</span> <span class="kn">from</span> <span class="nn">zc.relation.interfaces</span> <span class="kn">import</span> <span class="n">ICatalog</span>
+<span class="o">...</span> <span class="n">catalog</span> <span class="o">=</span> <span class="n">getUtility</span><span class="p">(</span><span class="n">ICatalog</span><span class="p">)</span>
+<span class="o">...</span> <span class="n">btree</span> <span class="o">=</span> <span class="n">catalog</span><span class="o">.</span><span class="n">_name_TO_mapping</span><span class="p">[</span><span class="s1">&#39;to_interfaces_flattened&#39;</span><span class="p">]</span>
+<span class="o">...</span> <span class="n">catalog</span><span class="o">.</span><span class="n">_name_TO_mapping</span><span class="p">[</span><span class="s1">&#39;to_interfaces_flattened&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">btree</span><span class="o">.</span><span class="n">__class__</span><span class="p">(</span><span class="n">btree</span><span class="p">)</span>
+</pre></div>
+<p>Creating a copy of the BTree will readd everything in the right order.</p>
+<p>I am going to improve the error reporting in zc.relation to give a better hint of what might be wrong, but I am not sure of a good way to repair such a problem automatically.</p>
+<p>Anyway, I hope this helps!</p>
+
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>
