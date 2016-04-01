@@ -27,7 +27,7 @@ If you mixed up functional and integration tests in the past, the [Plone Trainin
 
 Go use plone.testing 5.0.0!
 ---
-categories: plone
+categories: plone, python
 ---
 pub_date: 2016-04-01
 ---
