@@ -2,13 +2,198 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">do3cc blog</title>
   <id>urn:uuid:3dea200e-c32c-377d-a59d-2d5294c23d66</id>
-  <updated>2016-04-01T00:00:00Z</updated>
+  <updated>2016-10-29T00:00:00Z</updated>
   <link href="http://do3.cc/blog/" />
   <link href="http://do3.cc/blog/category/plone/feed/atom/index.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.1">Lektor Atom Plugin</generator>
+  <entry xml:base="http://do3.cc/blog/2016/10/303/saturday-lighting-pyconde16/">
+    <title type="text">Lightning Talks Saturday</title>
+    <id>urn:uuid:fe54f29c-5171-3998-9222-d4e07ef8516b</id>
+    <updated>2016-10-29T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2016/10/303/saturday-lighting-pyconde16/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;h2&gt;Alex Hendorf&lt;/h2&gt;
+&lt;p&gt;First Europython 2017 Announcement.&lt;br/&gt;
+We had lots of proposals.&lt;br/&gt;
+We choose Rimini.&lt;br/&gt;
+Lots of applause after some nice pictures.&lt;br/&gt;
+Conference center got awarded as best Conference center.&lt;br/&gt;
+Good Hotel rates. No Airport in Rimini, come via Bologna.&lt;br/&gt;
+Like last year in July.&lt;br/&gt;
+&lt;a href=&quot;http://www.europython.eu&quot;&gt;http://www.europython.eu&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Reimar Bauer&lt;/h2&gt;
+&lt;p&gt;Pythoncamp 8.- 9. April 2017&lt;br/&gt;
+Cologne, Free entrance.&lt;br/&gt;
+&lt;a href=&quot;http://www.pythoncamp.de&quot;&gt;http://www.pythoncamp.de&lt;/a&gt;&lt;br/&gt;
+Different to conference&lt;br/&gt;
+Everybody should give a talk.&lt;br/&gt;
+Last year 70 attendees and 60 talks.&lt;br/&gt;
+Need sponsors.&lt;br/&gt;
+Need organizers.&lt;br/&gt;&lt;/p&gt;
+&lt;h2&gt;Daniele Procida&lt;/h2&gt;
+&lt;p&gt;Wanted a Python adventures in Africa.&lt;br/&gt;
+Had a dream of doing something with python in africa.&lt;br/&gt;
+python Namibia 2015&lt;br/&gt;
+Python Namibia 2016&lt;br/&gt;
+It is easy to get to Namibia. From Frankfurt go to south afrika, shortly&lt;br/&gt;
+before, turn right.&lt;br/&gt;
+Venue in Windhoek.&lt;br/&gt;
+118 attendees, 50% women (lost the rest from the slides)&lt;br/&gt;
+4 days program&lt;br/&gt;
+Many sponsors (Django)&lt;br/&gt;
+PSF supported with 50 preconfigured Raspberry Pi&lt;br/&gt;
+Got a lot of press coverage, well received.&lt;br/&gt;
+As a result now also a Pycon Zimbabwe 2016&lt;br/&gt;&lt;/p&gt;
+&lt;h2&gt;Steffen Allner&lt;/h2&gt;
+&lt;p&gt;Zope's not dead&lt;br/&gt;
+We talked with Plone. We don't want it dead.&lt;br/&gt;
+Would like to move to Python 3. 30 people in a sprint.&lt;br/&gt;
+People use it: In routers, for other CMS than Plone...&lt;br/&gt;
+Successful sprint in Halle.&lt;br/&gt;
+RestrictedPython is main difficulity for Python 3.&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;Roadmap:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Q1.2017 RestrictePython&lt;/li&gt;
+&lt;li&gt;Q2. Working Zope app&lt;/li&gt;
+&lt;li&gt;Q3 2. Resurrection spring&lt;/li&gt;
+&lt;li&gt;Q4. Zope Release with Py3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Join us. &lt;a href=&quot;http://www.meetup.com/de-DE/Zope-Sprint/&quot;&gt;http://www.meetup.com/de-DE/Zope-Sprint/&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Claus Aiohinger&lt;/h2&gt;
+&lt;p&gt;Announcement Pycon2017 Slovakia.
+10.3.-12.3. 2017 in Bratislava&lt;/p&gt;
+&lt;p&gt;CFP is still open. Looking for first time speaker specifically&lt;/p&gt;
+&lt;p&gt;Please come!&lt;/p&gt;
+&lt;h2&gt;coala Team&lt;/h2&gt;
+&lt;p&gt;Coala. Tradtion in giving Lighting talk.&lt;br/&gt;
+Coala for linting and fixing every programming language&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;Would you want to rewrite Libreoffice to add spellchecker for another language?&lt;br/&gt;
+Then why do you do it with linting tool?&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;Coala provides a framework to reuse linting tools for many languages.&lt;br/&gt;
+Support 56 languages. 57 since 5 minutes.&lt;br/&gt;
+We wrap existing tools.&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;Coala can not only find problems, but also fix them.&lt;/p&gt;
+&lt;p&gt;Got something new: Moving from declaring the tools to use for checking to
+declaring what type of checks to run, independent of programming languages.
+We are looking for sponsors.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://coala.io/usability&quot;&gt;http://coala.io/usability&lt;/a&gt;&lt;br/&gt;
+Win a shirt, beer or chocoloate.&lt;/p&gt;
+&lt;h2&gt;Max Scholz&lt;/h2&gt;
+&lt;p&gt;(This is a bit incomplete, the speaker spoke in long sentences that are hard to follow if you try to summarize them in parallel. please watch the talk to get more sense out of it)&lt;/p&gt;
+&lt;p&gt;I told the story already at europython.&lt;br/&gt;
+It is about me trailing in sweden.&lt;br/&gt;
+3 years ago I needed a break from university and humans.&lt;br/&gt;
+It was the first time I walked, it was new for me to be alone. I took a camera and made pictures. Most of my memories were pictures.&lt;br/&gt;
+2 years ago I went again. This time, instead of taking pictures of things I liked, I just sat down and enjoyed it.&lt;br/&gt;
+One time, I sat for 2 hours and was suddenly full of flies. Why I am the king of flies I thought. Maybe because I was sweating?&lt;br/&gt;
+My gist: If you go for a walk, take your time, don't waste time making pictures, enhjoy your leisure time to the fullest and just watch.&lt;br/&gt;
+My difference to europython conference talk:&lt;br/&gt;
+I did not want to emphafize to never take pictures. I don't want to document what I am doing, I just want to enjoy what I am experiencing.&lt;br/&gt;
+Be mor mindful about what you experience.&lt;br/&gt;&lt;/p&gt;
+&lt;h2&gt;Christian Barra&lt;/h2&gt;
+&lt;p&gt;PyData Poland Announcement&lt;br/&gt;
+First national PyData Conference.&lt;br/&gt;
+Topics:&lt;br/&gt;
+PythonR Julia Databases Machine learning npp....&lt;br/&gt;
+3 day conf Friday to Sunday&lt;br/&gt;
+Probably during Spring 2017&lt;br/&gt;
+Nno definitive location yet. Somwhere in Poland.&lt;br/&gt;
+&lt;a href=&quot;http://www.pydata.pl&quot;&gt;http://www.pydata.pl&lt;/a&gt; (Not working yet)&lt;br/&gt;
+Who wants to join?&lt;br/&gt;
+We aready have a CoC.&lt;br/&gt;
+We want to have a track: Women in pydata.&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;We need sponseors, co-organizers, speakers...&lt;/p&gt;
+&lt;h2&gt;Mike Muller&lt;/h2&gt;
+&lt;p&gt;PySV&lt;br/&gt;
+Serving the german speaking python community&lt;br/&gt;
+pysv.org&lt;br/&gt;
+Representing the community&lt;br/&gt;
+organizes as german foundation&lt;br/&gt;
+Mike Muller Reimar Bauer Thomas Fabula are in the current Board&lt;br/&gt;
+We support Usergroups, Events, Public Relations.&lt;br/&gt;
+Or help is ogranisational, financial, technical (Infrastructure)&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;We are organized in working groups:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PyConDE&lt;/li&gt;
+&lt;li&gt;Public Relations&lt;/li&gt;
+&lt;li&gt;external networks&lt;/li&gt;
+&lt;li&gt;communities...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Coordination happens via monthly irc meetings.&lt;br/&gt;
+Open for all.&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;Become a member:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Personal member&lt;/li&gt;
+&lt;li&gt;freelancer&lt;/li&gt;
+&lt;li&gt;Companies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;General Assembly: Today 18:00 room Omega (Board Election)&lt;/p&gt;
+&lt;p&gt;Personal statement:&lt;br/&gt;
+As part of the plonekonf2012 Orga Team, I can testify that there would not have been a conference without the support from PySV. Thank you!&lt;/p&gt;
+&lt;h2&gt;Anselm Kruis&lt;/h2&gt;
+&lt;p&gt;State of Stackless python&lt;br/&gt;
+Today I tagged Stackless 2.7.12.&lt;br/&gt;
+No funding for mainting Python 3, 3.3 works, 3.4 has bugs, 3.5 crashes&lt;br/&gt;
+Volunteers are welcome&lt;br/&gt;
+Join us: https//bitbucket.org/stackless-dev/stackless&lt;br/&gt;&lt;/p&gt;
+&lt;h2&gt;Martin Christen&lt;/h2&gt;
+&lt;p&gt;Geo python 2017&lt;br/&gt;
+May 8-10 in Basel, Switzerland&lt;br/&gt;
+Call for Contributors&lt;br/&gt;
+Last event in June&lt;br/&gt;
+&lt;a href=&quot;http://2016.geopython.net&quot;&gt;http://2016.geopython.net&lt;/a&gt;&lt;br/&gt;
+This year&lt;br/&gt;
+&lt;a href=&quot;http://2017.geopython.net&quot;&gt;http://2017.geopython.net&lt;/a&gt;&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;GIS, Big Data... Machine Learning&lt;/p&gt;
+&lt;p&gt;@GeoPythonConf&lt;/p&gt;
+&lt;h2&gt;Benedikt Eggers Markus Schaber&lt;/h2&gt;
+&lt;p&gt;Ironpython&lt;br/&gt;
+We are working on it again, after it turned dead, after microsoft dropped it.&lt;br/&gt;
+Python written in native C#&lt;br/&gt;
+Complete integration, most of python stdlib is there.&lt;br/&gt;
+You can use .netlibraries/assemblies together. Just import them as if they were
+python&lt;br/&gt;
+(Code example)&lt;br/&gt;
+Writing class in C#, in direct import in IronPython&lt;br/&gt;
+Ironpython is not dead any more&lt;br/&gt;
+10 active contributors.&lt;br/&gt;
+Now works on all(?) .net platforms, not only windows.&lt;br/&gt;&lt;/p&gt;
+&lt;h2&gt;Anreas Kopp&lt;/h2&gt;
+&lt;p&gt;Hackerspace: &lt;a href=&quot;http://www.erfindergarden.de&quot;&gt;http://www.erfindergarden.de&lt;/a&gt;
+Munich, Kolumbuspplatz&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;3dprinting&lt;/li&gt;
+&lt;li&gt;rasbperry pi&lt;/li&gt;
+&lt;li&gt;lasercutter&lt;/li&gt;
+&lt;li&gt;fun&lt;/li&gt;
+&lt;li&gt;play
+Planned to be a non profit.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Fab Academy 2016 a 5 month program
+You get a diploma from Chile.
+fabacademy.org&lt;/p&gt;
+&lt;h2&gt;Emil&lt;/h2&gt;
+&lt;p&gt;Our conf wifi.&lt;br/&gt;
+Shows how to install something for the wifi. But why?&lt;br/&gt;
+Some live hacking for the install script.&lt;br/&gt;
+Oh, he is making a live demo with a non licenced sublime.&lt;br/&gt;
+So my seating neighbors told me the script was supposed to install the required
+certificate to make the Enterprise WPA Login work.&lt;br/&gt;&lt;/p&gt;
+&lt;h2&gt;Orga team&lt;/h2&gt;
+&lt;p&gt;Best image tweet&lt;br/&gt;
+(Hope it will be mine)&lt;br/&gt;
+&lt;img src=&quot;/static/snake.jpg&quot; alt=&quot;Not the python conference you were looking for&quot;&gt;&lt;br/&gt;
+Ok, I won a quadrocopter, anybody has 4 AAA batteries?&lt;br/&gt;
+Thank you!&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;Now beer&lt;br/&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry xml:base="http://do3.cc/blog/2016/04/92/better-test-isolation-in-plone/">
     <title type="text">Better test isolation in Plone</title>
     <id>urn:uuid:d318649c-f81e-374c-8717-917cc832f139</id>
