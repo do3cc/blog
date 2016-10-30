@@ -1,0 +1,130 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Andreas Jung - Hunting for the best NoSQL database. Why we love ArangoDB — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  
+  <div class="blog-post">
+  
+    <h2>Andreas Jung - Hunting for the best NoSQL database. Why we love ArangoDB</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/do3cc">Patrick Gerken</a>
+    
+    on 2016-10-30
+  </p>
+  <p>NoSQL is not about performance, scaling, dropping ACID or hating sQL, it is about choice.</p>
+<p>Categories of NoSQL:</p>
+<ul>
+<li>key-value</li>
+<li>column oriented</li>
+<li>document based</li>
+<li>tabular</li>
+<li>graph</li>
+<li>xml/object db</li>
+</ul>
+<h2>New challenges</h2>
+<ul>
+<li>cloud</li>
+<li>replication</li>
+<li>data explosion (big data)</li>
+<li>globally distributed systems</li>
+<li>specialised requirements</li>
+</ul>
+<p>For this we need new solutions (nosql)</p>
+<h2>CAP Theorem</h2>
+<ul>
+<li>Consistency</li>
+<li>Availabilty</li>
+<li>Partition tolerance</li>
+</ul>
+<p>Choose two (or less)</p>
+<h2>My personal hunt for a multi purpose nosql db</h2>
+<ul>
+<li>Should fit most mid size projects</li>
+<li>document store</li>
+<li>arbitrary queries</li>
+<li>cross table relationships</li>
+<li>Transactional integrity, ACID, optional</li>
+<li>replication/clustering</li>
+</ul>
+<h2>FoundationDB</h2>
+<p>Got bought by Apple and killed</p>
+<h2>MarkLogic</h2>
+<p>Highend expensive solution.
+higly professional, feature complete,
+saved Oama Care</p>
+<h2>ArangoDB</h2>
+<p>A multi model database:</p>
+<ul>
+<li>JSON</li>
+<li>Key Value</li>
+<li>Graph database</li>
+<li>models can be combined</li>
+</ul>
+<h2>Foxx framework</h2>
+<ul>
+<li>implement you own rest micro services directly in javascript inside arango db</li>
+<li>batteries included, job queue</li>
+</ul>
+<h2>AQL</h2>
+<ul>
+<li>declarative human readable DSL for queries</li>
+<li>Query both documents and graphs</li>
+<li>ACID Suppport</li>
+<li>Easy to understand if you know sql.
+(Now a code sample)</li>
+</ul>
+<h2>Clustering, replication, sharding</h2>
+<ul>
+<li>Agency (cluster control via raft consensus protocol)</li>
+<li>synchronous/async replication with automatic failover</li>
+</ul>
+<h2>Benchmarks</h2>
+<p>Lots of hard to read images showing that Arango is quite fast</p>
+<h2>Python bindings</h2>
+<p>Hard to read again, but apparently you can treat a Arango document a bit like a dict.</p>
+<h2>Misc</h2>
+<ul>
+<li>Current version 3.0</li>
+<li>good documentation</li>
+<li>regular updates</li>
+<li>good community support.</li>
+<li>supported by ArangoDB Gmbh in Cologne (\o/)</li>
+</ul>
+
+    <div data-social-share-privacy="true" data-uri="/blog/2016/10/304/andreas-jung-arango-db/" data-title="Andreas Jung - Hunting for the best NoSQL database. Why we love ArangoDB"></div>
+  </div>
+
+  <div class="shariff">xxx</div>
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>

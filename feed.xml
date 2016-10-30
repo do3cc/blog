@@ -9,6 +9,95 @@
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.1">Lektor Atom Plugin</generator>
+  <entry xml:base="http://do3.cc/blog/2016/10/304/andreas-jung-arango-db/">
+    <title type="text">Andreas Jung - Hunting for the best NoSQL database. Why we love ArangoDB</title>
+    <id>urn:uuid:0e3af0b5-6970-3398-847f-7ff571e581ca</id>
+    <updated>2016-10-30T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2016/10/304/andreas-jung-arango-db/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;NoSQL is not about performance, scaling, dropping ACID or hating sQL, it is about choice.&lt;/p&gt;
+&lt;p&gt;Categories of NoSQL:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;key-value&lt;/li&gt;
+&lt;li&gt;column oriented&lt;/li&gt;
+&lt;li&gt;document based&lt;/li&gt;
+&lt;li&gt;tabular&lt;/li&gt;
+&lt;li&gt;graph&lt;/li&gt;
+&lt;li&gt;xml/object db&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;New challenges&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;cloud&lt;/li&gt;
+&lt;li&gt;replication&lt;/li&gt;
+&lt;li&gt;data explosion (big data)&lt;/li&gt;
+&lt;li&gt;globally distributed systems&lt;/li&gt;
+&lt;li&gt;specialised requirements&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For this we need new solutions (nosql)&lt;/p&gt;
+&lt;h2&gt;CAP Theorem&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Consistency&lt;/li&gt;
+&lt;li&gt;Availabilty&lt;/li&gt;
+&lt;li&gt;Partition tolerance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Choose two (or less)&lt;/p&gt;
+&lt;h2&gt;My personal hunt for a multi purpose nosql db&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Should fit most mid size projects&lt;/li&gt;
+&lt;li&gt;document store&lt;/li&gt;
+&lt;li&gt;arbitrary queries&lt;/li&gt;
+&lt;li&gt;cross table relationships&lt;/li&gt;
+&lt;li&gt;Transactional integrity, ACID, optional&lt;/li&gt;
+&lt;li&gt;replication/clustering&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;FoundationDB&lt;/h2&gt;
+&lt;p&gt;Got bought by Apple and killed&lt;/p&gt;
+&lt;h2&gt;MarkLogic&lt;/h2&gt;
+&lt;p&gt;Highend expensive solution.
+higly professional, feature complete,
+saved Oama Care&lt;/p&gt;
+&lt;h2&gt;ArangoDB&lt;/h2&gt;
+&lt;p&gt;A multi model database:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JSON&lt;/li&gt;
+&lt;li&gt;Key Value&lt;/li&gt;
+&lt;li&gt;Graph database&lt;/li&gt;
+&lt;li&gt;models can be combined&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Foxx framework&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;implement you own rest micro services directly in javascript inside arango db&lt;/li&gt;
+&lt;li&gt;batteries included, job queue&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;AQL&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;declarative human readable DSL for queries&lt;/li&gt;
+&lt;li&gt;Query both documents and graphs&lt;/li&gt;
+&lt;li&gt;ACID Suppport&lt;/li&gt;
+&lt;li&gt;Easy to understand if you know sql.
+(Now a code sample)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Clustering, replication, sharding&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Agency (cluster control via raft consensus protocol)&lt;/li&gt;
+&lt;li&gt;synchronous/async replication with automatic failover&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Benchmarks&lt;/h2&gt;
+&lt;p&gt;Lots of hard to read images showing that Arango is quite fast&lt;/p&gt;
+&lt;h2&gt;Python bindings&lt;/h2&gt;
+&lt;p&gt;Hard to read again, but apparently you can treat a Arango document a bit like a dict.&lt;/p&gt;
+&lt;h2&gt;Misc&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Current version 3.0&lt;/li&gt;
+&lt;li&gt;good documentation&lt;/li&gt;
+&lt;li&gt;regular updates&lt;/li&gt;
+&lt;li&gt;good community support.&lt;/li&gt;
+&lt;li&gt;supported by ArangoDB Gmbh in Cologne (\o/)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
   <entry xml:base="http://do3.cc/blog/2016/10/304/jonathan-stoppani-managing-dependencies-of-python-projects-pyconde16/">
     <title type="text">Jonathan Stoppani - Managing dependencies of Python projects pyconde16</title>
     <id>urn:uuid:3b681801-e0d2-3fec-b9b4-898238e0aa8e</id>
