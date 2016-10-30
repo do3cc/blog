@@ -1,0 +1,112 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Jonathan Stoppani - Managing dependencies of Python projects pyconde16 — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  
+  <div class="blog-post">
+  
+    <h2>Jonathan Stoppani - Managing dependencies of Python projects pyconde16</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/do3cc">Patrick Gerken</a>
+    
+    on 2016-10-30
+  </p>
+  <p>Assumptions:</p>
+<ul>
+<li>You use isolated envs</li>
+<li>You use pip</li>
+<li>You work on products, not libraries</li>
+</ul>
+<h2>Part 1</h2>
+<p>You start with::</p>
+<pre><code>pip install django
+pip install boto...
+</code></pre>
+<p>Now lets deploy.
+SSH to server, copy dist files, copy source, talk done!</p>
+<p>Second deployment:<br/>
+O, missed dependencies.
+requirements.txt to the rescue</p>
+<p>Third deployment:<br/>
+Everything breaks again, because you did not pin your packages yet.</p>
+<p>Fourth deployment:<br/>
+Also pin dependencies of your dependencies:</p>
+<pre><code>pip freeze &gt; requirements.txt
+</code></pre>
+<p>pip does not check that your dependencies are consistent to each other.</p>
+<p>pip-tools helps with that.</p>
+<p>pip-compile recursively compiles dependencies together and checks for consistency</p>
+<p>Workflow:<br/>
+Create a requirement.txt.in with top level requirements.<br/>
+Run pip-compile, and the requirements.txt contains all pinned requirements.<br/></p>
+<p>Every time you run pip-compile, the second level dependencies get updated again.
+If after that, tests fail, you must update your requirements.txt.in to document
+the known incompatibility.</p>
+<h2>Part 2</h2>
+<p>Number:</p>
+<ul>
+<li>5k websites,</li>
+<li>400 daily deployments.</li>
+<li>2 indexes (devpi)</li>
+<li>15 top level and 120 total distributions</li>
+<li>Goal: deploy in less than 2 minutes.</li>
+</ul>
+<p>pip compile takes time and can be platform specfic.
+pip install takes time to resolve distributions, resolves depdencies and install the distributions.</p>
+<p>Our solution: wheelsproxy
+a pypi proxy, builds wheels, knows abouts platform.
+<a href="http://github.com/divio/ac-wheelsproxy">http://github.com/divio/ac-wheelsproxy</a></p>
+<p>Uses docker to build wheels for the different platforms.</p>
+<p>pip install went down from 180 seconds to 15 seconds.</p>
+<p>Demo time:
+reqs.in file with 15 requirements.
+uploads reqs.in to wheelsproxy, then pip compile runs on the server with cached data.
+pip installed django with 120 requirements in 40 seconds.</p>
+<p>Summary:</p>
+<ul>
+<li>use pip-compile (thanks @nvie)</li>
+<li>Have test coverage to know that updated packages will work</li>
+<li>Cache your built wheels</li>
+<li>Scale up with the wheelsproxy</li>
+</ul>
+<p>Questions:
+What about tools to see if there are newer versions.<br/>
+Answer: you committed the reqs.txt, so run git-compile again and check the diff.</p>
+
+    <div data-social-share-privacy="true" data-uri="/blog/2016/10/304/jonathan-stoppani-managing-dependencies-of-python-projects-pyconde16/" data-title="Jonathan Stoppani - Managing dependencies of Python projects pyconde16"></div>
+  </div>
+
+  <div class="shariff">xxx</div>
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>

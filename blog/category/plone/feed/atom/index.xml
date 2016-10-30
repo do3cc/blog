@@ -2,13 +2,84 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">do3cc blog</title>
   <id>urn:uuid:3dea200e-c32c-377d-a59d-2d5294c23d66</id>
-  <updated>2016-10-29T00:00:00Z</updated>
+  <updated>2016-10-30T00:00:00Z</updated>
   <link href="http://do3.cc/blog/" />
   <link href="http://do3.cc/blog/category/plone/feed/atom/index.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.1">Lektor Atom Plugin</generator>
+  <entry xml:base="http://do3.cc/blog/2016/10/304/jonathan-stoppani-managing-dependencies-of-python-projects-pyconde16/">
+    <title type="text">Jonathan Stoppani - Managing dependencies of Python projects pyconde16</title>
+    <id>urn:uuid:3b681801-e0d2-3fec-b9b4-898238e0aa8e</id>
+    <updated>2016-10-30T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2016/10/304/jonathan-stoppani-managing-dependencies-of-python-projects-pyconde16/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;p&gt;Assumptions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You use isolated envs&lt;/li&gt;
+&lt;li&gt;You use pip&lt;/li&gt;
+&lt;li&gt;You work on products, not libraries&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Part 1&lt;/h2&gt;
+&lt;p&gt;You start with::&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip install django
+pip install boto...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now lets deploy.
+SSH to server, copy dist files, copy source, talk done!&lt;/p&gt;
+&lt;p&gt;Second deployment:&lt;br/&gt;
+O, missed dependencies.
+requirements.txt to the rescue&lt;/p&gt;
+&lt;p&gt;Third deployment:&lt;br/&gt;
+Everything breaks again, because you did not pin your packages yet.&lt;/p&gt;
+&lt;p&gt;Fourth deployment:&lt;br/&gt;
+Also pin dependencies of your dependencies:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pip freeze &amp;gt; requirements.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;pip does not check that your dependencies are consistent to each other.&lt;/p&gt;
+&lt;p&gt;pip-tools helps with that.&lt;/p&gt;
+&lt;p&gt;pip-compile recursively compiles dependencies together and checks for consistency&lt;/p&gt;
+&lt;p&gt;Workflow:&lt;br/&gt;
+Create a requirement.txt.in with top level requirements.&lt;br/&gt;
+Run pip-compile, and the requirements.txt contains all pinned requirements.&lt;br/&gt;&lt;/p&gt;
+&lt;p&gt;Every time you run pip-compile, the second level dependencies get updated again.
+If after that, tests fail, you must update your requirements.txt.in to document
+the known incompatibility.&lt;/p&gt;
+&lt;h2&gt;Part 2&lt;/h2&gt;
+&lt;p&gt;Number:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;5k websites,&lt;/li&gt;
+&lt;li&gt;400 daily deployments.&lt;/li&gt;
+&lt;li&gt;2 indexes (devpi)&lt;/li&gt;
+&lt;li&gt;15 top level and 120 total distributions&lt;/li&gt;
+&lt;li&gt;Goal: deploy in less than 2 minutes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;pip compile takes time and can be platform specfic.
+pip install takes time to resolve distributions, resolves depdencies and install the distributions.&lt;/p&gt;
+&lt;p&gt;Our solution: wheelsproxy
+a pypi proxy, builds wheels, knows abouts platform.
+&lt;a href=&quot;http://github.com/divio/ac-wheelsproxy&quot;&gt;http://github.com/divio/ac-wheelsproxy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Uses docker to build wheels for the different platforms.&lt;/p&gt;
+&lt;p&gt;pip install went down from 180 seconds to 15 seconds.&lt;/p&gt;
+&lt;p&gt;Demo time:
+reqs.in file with 15 requirements.
+uploads reqs.in to wheelsproxy, then pip compile runs on the server with cached data.
+pip installed django with 120 requirements in 40 seconds.&lt;/p&gt;
+&lt;p&gt;Summary:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;use pip-compile (thanks @nvie)&lt;/li&gt;
+&lt;li&gt;Have test coverage to know that updated packages will work&lt;/li&gt;
+&lt;li&gt;Cache your built wheels&lt;/li&gt;
+&lt;li&gt;Scale up with the wheelsproxy&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Questions:
+What about tools to see if there are newer versions.&lt;br/&gt;
+Answer: you committed the reqs.txt, so run git-compile again and check the diff.&lt;/p&gt;
+</content>
+  </entry>
   <entry xml:base="http://do3.cc/blog/2016/10/303/saturday-lighting-pyconde16/">
     <title type="text">Lightning Talks Saturday</title>
     <id>urn:uuid:fe54f29c-5171-3998-9222-d4e07ef8516b</id>
