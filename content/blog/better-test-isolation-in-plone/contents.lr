@@ -27,7 +27,7 @@ If you mixed up functional and integration tests in the past, the [Plone Trainin
 
 Go use plone.testing 5.0.0!
 ---
-categories: plone, python
+categories: python
 ---
 pub_date: 2016-04-01
 ---
@@ -37,3 +37,5 @@ A fallout of the 2016 Alpine City Sprint are a few new improvements in plone.tes
 They might break your test, but you will thank me later.
 ---
 twitter_handle: do3cc
+---
+_discoverable: yes
