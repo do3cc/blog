@@ -1,0 +1,253 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Wagtail Talks during Arnhem Sprint 2017 — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  
+  <div class="blog-post">
+  
+    <h2>Wagtail Talks during Arnhem Sprint 2017</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/do3cc">Patrick Gerken</a>
+    
+    on 2017-03-27
+  </p>
+  <h2>Edd Baldry</h2>
+<p>Edd gave a wonderful talk about agile development with Wagtail.<br>
+I listened, but I did not yet start taking notes.</p>
+<h2>Ben van't Ende - Building an Open Source Community</h2>
+<p>I know Four Digits for years. They evolved quite a bit and are very community oriented.<br>
+I am community manager/evangelist for Typo 3.<br>
+My first conference I can reach by bike.<br>
+How should we start building a community.<br>
+Just start! Start simple and talk with your community.<br>
+How to maintain and grow your community.<br>
+Take care of diversity, no Netherlands/Europe/America first!<br>
+Survey, 35k people were questioned about main qualities of communities.</p>
+<ul>
+<li>Social offerings</li>
+<li>Openness</li>
+<li>Area aesthetics.</li>
+</ul>
+<p>How to apply this to technical communities.<br>
+Three points to take care of:</p>
+<p>Openness: how welcoming is the community. How do you engage with the community.</p>
+<p>Purpose: What is the purpose of your community.<br>
+Linus Torvalds: Just get shit done (regarding purpose)<br>
+Being too focused, hinders engagement.</p>
+<p>Engagement:<br>
+Soft Skills: A community needs ... (too fast, positive things).<br>
+Don't ignore the shy people, try to engage them too.<br></p>
+<h2>Daniele Procida - Divio and Wagtail</h2>
+<p>Divio. Django CMS Developer.</p>
+<p>Divio is a hosting platform. Hosting as a service.<br>
+Aimed at developers and people who don't want to be deployment experts.<br>
+We use docker and git.<br>
+We provide 3 environments, local, test, live.<br>
+We do not compete with agencies. We don't develop Django.<br>
+We add exposure.<br>
+We provide quickstart apps for django cms, wagtail and some others.<br></p>
+<pre><code>On screenshots I can see cronjobs backups, collaborators, domains, etc.
+Has a gui to install plugins.
+Tool allows commits through the web. (I guess settings for additional apps).
+</code></pre>
+<p>My goal for this spring:</p>
+<ul>
+<li>Better wagtail base project on Divio Cloud.</li>
+<li>Better wagtail related docs.</li>
+<li>Wagtail as a first class citizen.</li>
+<li>Live wagtail project on divio cloud.</li>
+</ul>
+<h2>Robin von der Rijst  - Wagtail in practice</h2>
+<p>You'll hear tales from the trenches.</p>
+<p>Customers want wordpress. We ask them. You really need WP?
+Common misconceptions:</p>
+<ul>
+<li>cheaper</li>
+<li>quicker</li>
+<li>better support.</li>
+</ul>
+<p>For sure, with the right Template, it is fine. But customers don't come to us if they just need a template.</p>
+<p>Why wagtail:</p>
+<ul>
+<li>Very intuitive,</li>
+<li>Content Type</li>
+</ul>
+<p>Why not:</p>
+<ul>
+<li>When client already has something</li>
+<li>When they want an off the shelf solution</li>
+<li>When they need a webshop</li>
+</ul>
+<p>How we use it.</p>
+<pre><code>Some tricks I don't get yet becaue I don't do wagtail.
+</code></pre>
+<p>SinglePagePerSiteMixin, for pages that should only exist once. After that, it does not show as addable anymore.</p>
+<p>Common patterns</p>
+<p>Page model hierarchy:</p>
+<ol>
+<li>ProjectBasePage
+Common page attributes.</li>
+<li>Base page with our without visual.</li>
+<li>Mixins Pageintro, pagepromo...</li>
+<li>ProjectImage.</li>
+</ol>
+<p>Menus:</p>
+<ul>
+<li>Mainmenu, footermenu
+Two solutions<ol>
+<li>Custom menu app where you manage the menus per site<ul>
+<li>Easy to create links to things not a page</li>
+<li>More suitable for flat menus.</li>
+</ul>
+</li>
+<li>Extend the page model<ul>
+<li>add menu_option to use together with built-in show_in_menus</li>
+<li>Good for hierarchy.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>page promotion:</p>
+<ul>
+<li>Create a default representation for a page when shown somewhere else:<ul>
+<li>eg search results,</li>
+<li>related pages footer,</li>
+<li>facebook sharing.
+Offers max control for editors.<br>
+Add as mixin, if customer says nothing, use default, else, use custom setting.<br></li>
+</ul>
+</li>
+</ul>
+<p>Wagtail the bad<br>
+No file upload in forms.<br></p>
+<ul>
+<li>Needs custom form.
+No drag'n'drop in streamfield<br></li>
+<li>Use arrow buttons
+Cannot link to page preview (editor looks at preview, tries to copy link.)<br>
+Hallo.js looks nice, but... (everybody laughs..., except me)<br></li>
+<li>Swap it with another one.
+Streamfield with a lot of content gets a bit messy.<br>
+No hierarchy for media/document<br></li>
+<li>No folders in admin</li>
+<li>No folders on disk
+ModelAdmin: not quite up to par yet.<br></li>
+<li>No admin bulk actions</li>
+<li>no support for drag'n'drop sortable models.
+easy_thumbnails, feature focal_image.</li>
+</ul>
+<p>The ugly<br>
+not invented here<br></p>
+<ul>
+<li>wagtail thumbnails</li>
+<li>django polymorphic (No idea)
+View logic in (Page) models<br></li>
+<li>Undoing the mvc pattern</li>
+<li>verry un-django-y</li>
+</ul>
+<h2>Edd Baldry - Streamfields</h2>
+<p>One of the best things in wagtail.</p>
+<p>Problem, streamfield is not userfriendly from accessibility and user friendlyness view.<br>
+Deletion is fatal.<br>
+Nested streamfields are hard.<br>
+Live demo of improvement.</p>
+<ul>
+<li>He found a bug.</li>
+</ul>
+<h2>Tom Dyson - Wagtail Experiments</h2>
+<p>Start Charming Four Digits. Good sprint, good seeing so many people.<br>
+A/B Testing for frende.no<br>
+Existing solutions:</p>
+<ul>
+<li>Optimizely</li>
+<li>VWO</li>
+<li>Google experiments</li>
+</ul>
+<p>Can get expensive fast. At least first two.</p>
+<p>But hard requirements:</p>
+<ul>
+<li>No markup insertion</li>
+<li>All data stored in Norway</li>
+<li>Test creatable by editors</li>
+<li>Available in 3 weeks.</li>
+</ul>
+<p>Sixpack. ab tool written in python.fende</p>
+<p>Cool, but still, we did something on our own.</p>
+<p>We reimplemented facebooks fanout with django models and pluggable backends.</p>
+<p>Roadmap</p>
+<ul>
+<li>Cache-friendly</li>
+<li>Google analytics backend</li>
+<li>Add personalisation.</li>
+</ul>
+<h2>Bertrand Bordage - Wagtails preview a new hope</h2>
+<p>Preview seems to be broken.</p>
+<p>Now showing how to break it.<br>
+Now showing a table of feature that continue to work, stop working and gets added.<br>
+Next showing quite a few problems and how they could be handled.<br>
+It is mostly working and then will be better than wordpress.<br></p>
+<p>Please review <a href="https://github.com/wagtail/wagtail/pull/3383">https://github.com/wagtail/wagtail/pull/3383</a></p>
+<pre><code>I was surprised about having a talk about a Pull Request. 
+But from the comments and realized that this was actually quite clever.
+The PR seemed to touch some behaviors for which there is no major consensus 
+but strong opinion.  
+</code></pre>
+<h2>Matt Westcott - The Zen of Wagtail</h2>
+<p>Early days, not a lot of advance planning<br>
+I finally have to write down the guiding principles for developing wagtail</p>
+<p>Always wear the right hat.</p>
+<ul>
+<li>Developer</li>
+<li>Content Editor</li>
+<li>Designer</li>
+<li>Site admin</li>
+</ul>
+<p>Let programmers program by writing programs.<br>
+Screenshot of page to set fields.<br>
+Programmers don't need to configure fields ttw.<br>
+Shows a class diagram of what is needed for ttw field creation. Everybody is crying.</p>
+<p>SiteAdmin doesn't define content types, programmers do.</p>
+<p>wagtail forms example of an ui targeted at content editors.<br>
+special forms, let it make the programmer.<br></p>
+<p>Wagtail is just the top of the stack. Don't forget about the rest.</p>
+<p>Content management is about transferring information from peoples brains into the db as fast as possible.</p>
+<p>Deliver complexity when it's needed, not before.</p>
+
+    <div data-social-share-privacy="true" data-uri="/blog/2017/03/86/dutch_wagtail_sprint_2017/" data-title="Wagtail Talks during Arnhem Sprint 2017"></div>
+  </div>
+
+  <div class="shariff">xxx</div>
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>

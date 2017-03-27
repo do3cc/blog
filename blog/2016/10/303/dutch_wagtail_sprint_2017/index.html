@@ -1,0 +1,249 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Lightning Talks Saturday — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  
+  <div class="blog-post">
+  
+    <h2>Lightning Talks Saturday</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/do3cc">Patrick Gerken</a>
+    
+    on 2016-10-29
+  </p>
+  <h2>Edd Baldry</h2>
+<h2>Ben van't Ende - Building an Open Source Community</h2>
+<p>I know Four digits for years. They evolved quite a bit and are very community oriented.
+I am community manager/evangelist(?) for Typo 3.
+My first conference I can reach by bike.
+How should we start building a community.
+Just start! Start simple and talk with your community.
+How to maintain and grow your community.
+Take care of diversity, no xx first!
+Three points to take core of</p>
+<p>Survey, 35k people were questioned about main qualities of communities.</p>
+<ul>
+<li>Social offerings</li>
+<li>Openness</li>
+<li>Area aesthetics.
+How to apply this to technical communities.</li>
+</ul>
+<p>Openness, how welcome is the community. How do you engage with the community.
+What is the purpose of your community.
+Linus Torvalds: Just get shit done (regarding purpose)
+Being too focused, hinders engagement.
+Soft Skills: A community needs ... too fast, positive things.
+Don't ignore the shy people, try to engage them too.
+Engagement.
+Purpose</p>
+<h2>Daniele</h2>
+<p>Divio. Django CMS Developer. Was on tv</p>
+<p>Divio is a hosting platform. Hosting as a service.</p>
+<p>Aimed at develoeprs and people who don't want to be deployment experts.</p>
+<p>We use docker and git.</p>
+<p>We provide 3 environments, local, test, live.</p>
+<p>We do not compete with agencies. We do'nt develop. Django.</p>
+<p>We add expuse</p>
+<p>We provide quickstart apps for django cms, wagtail and some others.</p>
+<p>I can see cronjobs backups, collaborators, domains, etc.
+Has a gui to instlal plugins.</p>
+<p>Tool allows commits throguht the web. (I guess settings for additional apps).</p>
+<p>My goal for this spring:</p>
+<ul>
+<li>Better wagtail base project on Divio Cloud.</li>
+<li>Better wagtail related docs.</li>
+<li>Wagtail as a first class citizen.</li>
+<li>Live wagtail project on divio cloud.</li>
+</ul>
+<h2>Robin von der Rijst  - Wagtail in practice</h2>
+<p>You'll hear tales from the trenches.</p>
+<p>Customers want wordpress. We ask them. You really need WP?
+Common misconceptions:</p>
+<ul>
+<li>cheaper</li>
+<li>quicker</li>
+<li>better support.</li>
+</ul>
+<p>For sure, with the right Template, is fine. But custoemrs don't come to us if they just need a template.</p>
+<p>Why wagtail:</p>
+<ul>
+<li>Very intuitive,</li>
+<li>Content Type</li>
+</ul>
+<p>Why not:</p>
+<ul>
+<li>When client already has something.</li>
+<li>When they want an off the shelf solution</li>
+<li>When they need a webshop.</li>
+</ul>
+<p>How we use it.
+Some tricks I don't get yet becaue I don't do wagtail.
+SinglePagePerSiteMixin, for pages that should only exist once. After that, it does not show as addable anymore.</p>
+<p>Common pattern:
+Page model hierarchy:</p>
+<ol>
+<li>ProjectBasePage
+Common page attributes.</li>
+<li>Base page with our without visual.</li>
+<li>Mixins Pageintro, pagepromo...</li>
+<li>ProjectImage.</li>
+</ol>
+<p>Menus:</p>
+<ul>
+<li>Mainmenu, footermenu
+Two solutions<ol>
+<li>Custom menu app where you manage the menus per site<ul>
+<li>Easy to create links to things not a page</li>
+<li>More suitable for flat menus.</li>
+</ul>
+</li>
+<li>Extend the page model<ul>
+<li>add menu_option to use together with built-in show_in_menus</li>
+<li>Good for hierarchy.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>page promotion:</p>
+<ul>
+<li>Create a default representation for a page when shown somewhere else:<ul>
+<li>eg search results,</li>
+<li>related pages footer,</li>
+<li>facebook sharing.
+Offers max control for editors.
+Add as mixin, if customer says nothing, use default, else, use custom setting.</li>
+</ul>
+</li>
+</ul>
+<p>Wagtail the bad
+No file upload in forms.</p>
+<ul>
+<li>Needs custom form.
+No drag'n'drop in streamfield</li>
+<li>Use arrow buttons
+Cannot link to page preview (editor looks at preview, tries to copy link.)
+Hallo.js looks nice, but... (everybody laughs..., except me)</li>
+<li>Swap it with another one.
+Streamfield with a lot of content gets a bit messy.
+No hierarchy for media/document</li>
+<li>No folders in admin</li>
+<li>No folders on disk
+ModelAdmin: not quite up to par yet.</li>
+<li>No admin bulk actions</li>
+<li>no support for drag'n'drop sortable models.
+easy_thumbnails, feature focal_image.</li>
+</ul>
+<p>The ugly
+not invented here</p>
+<ul>
+<li>wagtail thumbnails</li>
+<li>django polymorphic (No idea)
+View logic in (Page) models</li>
+<li>Undoing the mvc pattern</li>
+<li>verry un-dkango-y</li>
+</ul>
+<h2>Edd- Streamfields</h2>
+<p>One of the best things in wagtail.</p>
+<p>Problem, streamfield is not userfriendly from accessibility and user friendlyness view.
+Deletion is fatal.
+Nested streamfields are hard.
+Live demo of improvement.</p>
+<ul>
+<li>He found a bug.</li>
+</ul>
+<h2>Tom Dyson - Wagteil Experiments</h2>
+<p>Start Charming Four digits. Good sprint, good seeing so many people.
+A/B Testing for frende.no
+Existing solutions:</p>
+<ul>
+<li>Optimizely</li>
+<li>VWO</li>
+<li>Googl experiments</li>
+</ul>
+<p>Can get expensive fast. At least first two.</p>
+<p>But hard requirements:</p>
+<ul>
+<li>No markup insertion</li>
+<li>All data stored in norway</li>
+<li>Test creatable by editors</li>
+<li>Available in 3 weeks.</li>
+</ul>
+<p>Sixpack. ab tool written in python.fende</p>
+<p>Cool, but still, we did something on our own.</p>
+<p>We reimplemented facebooks fanout with django models and pluggable backends.</p>
+<p>Roadmap</p>
+<ul>
+<li>Cache-friendly</li>
+<li>Google analytics backend</li>
+<li><p>Add personalisation.</p>
+</li>
+<li><p>Wagtails preview a new hope</p>
+</li>
+</ul>
+<hr>
+<p>Preview seems to be broken.</p>
+<p>Now showing how to break it.</p>
+<p>Now showing a table of feature that continue to work, stop working and gets added.</p>
+<p>Next showing quite a few problems and how they could be handled.</p>
+<p>It is mostly working and then will be better than wordpress.</p>
+<p>Please review #3383</p>
+<h2>Matt Westcott - The Zen of Wagtail</h2>
+<p>Early days, not a lot of advance planning.</p>
+<p>I finally have to write down the guiding principles for developing wagtail</p>
+<p>Always wear the right hat.</p>
+<ul>
+<li>Developer</li>
+<li>Content Editor</li>
+<li>Designer</li>
+<li>Site admin</li>
+</ul>
+<p>Let programmers program by writing programs.
+Screenshot of page to set fields.
+Programmers don't need to configure fields ttw.
+Shows a class diagram of what is needed for ttw field creation. Everybody is crying.</p>
+<p>SiteAdmin doesn't define content types, programmers do.</p>
+<p>wagtail forms example of an ui targeted at content editors.
+special forms, let it make the programmer. Plone can handle that.</p>
+<p>Wagtail is just the top of the stack. Don't forget about the rest.</p>
+<p>Content management is about tranferring information from peopls brains into the db as fast as possible.</p>
+<p>Deliver complexity when it's needed, not before.</p>
+<p>categories: python</p>
+
+    <div data-social-share-privacy="true" data-uri="/blog/2016/10/303/dutch_wagtail_sprint_2017/" data-title="Lightning Talks Saturday"></div>
+  </div>
+
+  <div class="shariff">xxx</div>
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>

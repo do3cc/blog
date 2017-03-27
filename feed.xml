@@ -2,13 +2,225 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">do3cc blog</title>
   <id>urn:uuid:3dea200e-c32c-377d-a59d-2d5294c23d66</id>
-  <updated>2016-10-30T00:00:00Z</updated>
+  <updated>2017-03-27T00:00:00Z</updated>
   <link href="http://do3.cc/blog/" />
   <link href="http://do3.cc/feed.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.1">Lektor Atom Plugin</generator>
+  <entry xml:base="http://do3.cc/blog/2017/03/86/dutch_wagtail_sprint_2017/">
+    <title type="text">Wagtail Talks during Arnhem Sprint 2017</title>
+    <id>urn:uuid:becd3671-134d-3ebf-ba5c-1882f69726c5</id>
+    <updated>2017-03-27T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2017/03/86/dutch_wagtail_sprint_2017/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;h2&gt;Edd Baldry&lt;/h2&gt;
+&lt;p&gt;Edd gave a wonderful talk about agile development with Wagtail.&lt;br&gt;
+I listened, but I did not yet start taking notes.&lt;/p&gt;
+&lt;h2&gt;Ben van't Ende - Building an Open Source Community&lt;/h2&gt;
+&lt;p&gt;I know Four Digits for years. They evolved quite a bit and are very community oriented.&lt;br&gt;
+I am community manager/evangelist for Typo 3.&lt;br&gt;
+My first conference I can reach by bike.&lt;br&gt;
+How should we start building a community.&lt;br&gt;
+Just start! Start simple and talk with your community.&lt;br&gt;
+How to maintain and grow your community.&lt;br&gt;
+Take care of diversity, no Netherlands/Europe/America first!&lt;br&gt;
+Survey, 35k people were questioned about main qualities of communities.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Social offerings&lt;/li&gt;
+&lt;li&gt;Openness&lt;/li&gt;
+&lt;li&gt;Area aesthetics.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;How to apply this to technical communities.&lt;br&gt;
+Three points to take care of:&lt;/p&gt;
+&lt;p&gt;Openness: how welcoming is the community. How do you engage with the community.&lt;/p&gt;
+&lt;p&gt;Purpose: What is the purpose of your community.&lt;br&gt;
+Linus Torvalds: Just get shit done (regarding purpose)&lt;br&gt;
+Being too focused, hinders engagement.&lt;/p&gt;
+&lt;p&gt;Engagement:&lt;br&gt;
+Soft Skills: A community needs ... (too fast, positive things).&lt;br&gt;
+Don't ignore the shy people, try to engage them too.&lt;br&gt;&lt;/p&gt;
+&lt;h2&gt;Daniele Procida - Divio and Wagtail&lt;/h2&gt;
+&lt;p&gt;Divio. Django CMS Developer.&lt;/p&gt;
+&lt;p&gt;Divio is a hosting platform. Hosting as a service.&lt;br&gt;
+Aimed at developers and people who don't want to be deployment experts.&lt;br&gt;
+We use docker and git.&lt;br&gt;
+We provide 3 environments, local, test, live.&lt;br&gt;
+We do not compete with agencies. We don't develop Django.&lt;br&gt;
+We add exposure.&lt;br&gt;
+We provide quickstart apps for django cms, wagtail and some others.&lt;br&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;On screenshots I can see cronjobs backups, collaborators, domains, etc.
+Has a gui to install plugins.
+Tool allows commits through the web. (I guess settings for additional apps).
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My goal for this spring:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Better wagtail base project on Divio Cloud.&lt;/li&gt;
+&lt;li&gt;Better wagtail related docs.&lt;/li&gt;
+&lt;li&gt;Wagtail as a first class citizen.&lt;/li&gt;
+&lt;li&gt;Live wagtail project on divio cloud.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Robin von der Rijst  - Wagtail in practice&lt;/h2&gt;
+&lt;p&gt;You'll hear tales from the trenches.&lt;/p&gt;
+&lt;p&gt;Customers want wordpress. We ask them. You really need WP?
+Common misconceptions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;cheaper&lt;/li&gt;
+&lt;li&gt;quicker&lt;/li&gt;
+&lt;li&gt;better support.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For sure, with the right Template, it is fine. But customers don't come to us if they just need a template.&lt;/p&gt;
+&lt;p&gt;Why wagtail:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Very intuitive,&lt;/li&gt;
+&lt;li&gt;Content Type&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Why not:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;When client already has something&lt;/li&gt;
+&lt;li&gt;When they want an off the shelf solution&lt;/li&gt;
+&lt;li&gt;When they need a webshop&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;How we use it.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Some tricks I don't get yet becaue I don't do wagtail.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;SinglePagePerSiteMixin, for pages that should only exist once. After that, it does not show as addable anymore.&lt;/p&gt;
+&lt;p&gt;Common patterns&lt;/p&gt;
+&lt;p&gt;Page model hierarchy:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;ProjectBasePage
+Common page attributes.&lt;/li&gt;
+&lt;li&gt;Base page with our without visual.&lt;/li&gt;
+&lt;li&gt;Mixins Pageintro, pagepromo...&lt;/li&gt;
+&lt;li&gt;ProjectImage.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Menus:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mainmenu, footermenu
+Two solutions&lt;ol&gt;
+&lt;li&gt;Custom menu app where you manage the menus per site&lt;ul&gt;
+&lt;li&gt;Easy to create links to things not a page&lt;/li&gt;
+&lt;li&gt;More suitable for flat menus.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Extend the page model&lt;ul&gt;
+&lt;li&gt;add menu_option to use together with built-in show_in_menus&lt;/li&gt;
+&lt;li&gt;Good for hierarchy.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;page promotion:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Create a default representation for a page when shown somewhere else:&lt;ul&gt;
+&lt;li&gt;eg search results,&lt;/li&gt;
+&lt;li&gt;related pages footer,&lt;/li&gt;
+&lt;li&gt;facebook sharing.
+Offers max control for editors.&lt;br&gt;
+Add as mixin, if customer says nothing, use default, else, use custom setting.&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Wagtail the bad&lt;br&gt;
+No file upload in forms.&lt;br&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Needs custom form.
+No drag'n'drop in streamfield&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Use arrow buttons
+Cannot link to page preview (editor looks at preview, tries to copy link.)&lt;br&gt;
+Hallo.js looks nice, but... (everybody laughs..., except me)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Swap it with another one.
+Streamfield with a lot of content gets a bit messy.&lt;br&gt;
+No hierarchy for media/document&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;No folders in admin&lt;/li&gt;
+&lt;li&gt;No folders on disk
+ModelAdmin: not quite up to par yet.&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;No admin bulk actions&lt;/li&gt;
+&lt;li&gt;no support for drag'n'drop sortable models.
+easy_thumbnails, feature focal_image.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The ugly&lt;br&gt;
+not invented here&lt;br&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;wagtail thumbnails&lt;/li&gt;
+&lt;li&gt;django polymorphic (No idea)
+View logic in (Page) models&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Undoing the mvc pattern&lt;/li&gt;
+&lt;li&gt;verry un-django-y&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Edd Baldry - Streamfields&lt;/h2&gt;
+&lt;p&gt;One of the best things in wagtail.&lt;/p&gt;
+&lt;p&gt;Problem, streamfield is not userfriendly from accessibility and user friendlyness view.&lt;br&gt;
+Deletion is fatal.&lt;br&gt;
+Nested streamfields are hard.&lt;br&gt;
+Live demo of improvement.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;He found a bug.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tom Dyson - Wagtail Experiments&lt;/h2&gt;
+&lt;p&gt;Start Charming Four Digits. Good sprint, good seeing so many people.&lt;br&gt;
+A/B Testing for frende.no&lt;br&gt;
+Existing solutions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Optimizely&lt;/li&gt;
+&lt;li&gt;VWO&lt;/li&gt;
+&lt;li&gt;Google experiments&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Can get expensive fast. At least first two.&lt;/p&gt;
+&lt;p&gt;But hard requirements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;No markup insertion&lt;/li&gt;
+&lt;li&gt;All data stored in Norway&lt;/li&gt;
+&lt;li&gt;Test creatable by editors&lt;/li&gt;
+&lt;li&gt;Available in 3 weeks.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sixpack. ab tool written in python.fende&lt;/p&gt;
+&lt;p&gt;Cool, but still, we did something on our own.&lt;/p&gt;
+&lt;p&gt;We reimplemented facebooks fanout with django models and pluggable backends.&lt;/p&gt;
+&lt;p&gt;Roadmap&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cache-friendly&lt;/li&gt;
+&lt;li&gt;Google analytics backend&lt;/li&gt;
+&lt;li&gt;Add personalisation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Bertrand Bordage - Wagtails preview a new hope&lt;/h2&gt;
+&lt;p&gt;Preview seems to be broken.&lt;/p&gt;
+&lt;p&gt;Now showing how to break it.&lt;br&gt;
+Now showing a table of feature that continue to work, stop working and gets added.&lt;br&gt;
+Next showing quite a few problems and how they could be handled.&lt;br&gt;
+It is mostly working and then will be better than wordpress.&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Please review &lt;a href=&quot;https://github.com/wagtail/wagtail/pull/3383&quot;&gt;https://github.com/wagtail/wagtail/pull/3383&lt;/a&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;I was surprised about having a talk about a Pull Request. 
+But from the comments and realized that this was actually quite clever.
+The PR seemed to touch some behaviors for which there is no major consensus 
+but strong opinion.  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Matt Westcott - The Zen of Wagtail&lt;/h2&gt;
+&lt;p&gt;Early days, not a lot of advance planning&lt;br&gt;
+I finally have to write down the guiding principles for developing wagtail&lt;/p&gt;
+&lt;p&gt;Always wear the right hat.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Developer&lt;/li&gt;
+&lt;li&gt;Content Editor&lt;/li&gt;
+&lt;li&gt;Designer&lt;/li&gt;
+&lt;li&gt;Site admin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let programmers program by writing programs.&lt;br&gt;
+Screenshot of page to set fields.&lt;br&gt;
+Programmers don't need to configure fields ttw.&lt;br&gt;
+Shows a class diagram of what is needed for ttw field creation. Everybody is crying.&lt;/p&gt;
+&lt;p&gt;SiteAdmin doesn't define content types, programmers do.&lt;/p&gt;
+&lt;p&gt;wagtail forms example of an ui targeted at content editors.&lt;br&gt;
+special forms, let it make the programmer.&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Wagtail is just the top of the stack. Don't forget about the rest.&lt;/p&gt;
+&lt;p&gt;Content management is about transferring information from peoples brains into the db as fast as possible.&lt;/p&gt;
+&lt;p&gt;Deliver complexity when it's needed, not before.&lt;/p&gt;
+</content>
+  </entry>
   <entry xml:base="http://do3.cc/blog/2016/10/304/andreas-jung-arango-db/">
     <title type="text">Andreas Jung - Hunting for the best NoSQL database. Why we love ArangoDB</title>
     <id>urn:uuid:0e3af0b5-6970-3398-847f-7ff571e581ca</id>
@@ -405,15 +617,15 @@ In the beginning of the Project, we had a dependency on Products.LinguaPlone but
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Publish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;126&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publish&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;77&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mapply&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ZPublisher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Publish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;46&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;call_object&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__call__&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;fm&quot;&gt;__call__&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;54&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dexterity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;browser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;edit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;52&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fieldsets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extensible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;59&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z3cform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;patch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;GroupForm_update&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;138&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;99&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;315&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__call__&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;170&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__call__&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;315&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;fm&quot;&gt;__call__&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;170&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;fm&quot;&gt;__call__&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dexterity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;browser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;edit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handleApply&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z3c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;form&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;119&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;applyChanges&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notify&lt;/span&gt;
@@ -442,7 +654,7 @@ That OOBTree claimed that the OOBTree does not contain that key, but when iterat
 &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;zc.relation.interfaces&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ICatalog&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getUtility&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ICatalog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btree&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_name_TO_mapping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;to_interfaces_flattened&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_name_TO_mapping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;to_interfaces_flattened&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__class__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;catalog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_name_TO_mapping&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;to_interfaces_flattened&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;vm&quot;&gt;__class__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Creating a copy of the BTree will readd everything in the right order.&lt;/p&gt;
 &lt;p&gt;I am going to improve the error reporting in zc.relation to give a better hint of what might be wrong, but I am not sure of a good way to repair such a problem automatically.&lt;/p&gt;
