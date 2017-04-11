@@ -20,7 +20,7 @@ pipsi==0.9
 pyasn1==0.2.3
 pycparser==2.17
 pyOpenSSL==16.2.0
-pytz==2015.7
+pytz==2017.2
 PyYAML==3.11
 requests==2.9.1
 six==1.10.0
