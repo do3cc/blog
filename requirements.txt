@@ -8,7 +8,7 @@ ExifRead==2.1.2
 Flask==0.12.1
 idna==2.5
 inifile==0.3
-ipaddress==1.0.16
+ipaddress==1.0.18
 itsdangerous==0.24
 Jinja2==2.8
 Lektor==2.3
