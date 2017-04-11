@@ -22,7 +22,7 @@ pycparser==2.17
 pyOpenSSL==16.2.0
 pytz==2017.2
 PyYAML==3.12
-requests==2.9.1
+requests==2.13.0
 six==1.10.0
 virtualenv==14.0.6
 watchdog==0.8.3
