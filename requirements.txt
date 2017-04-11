@@ -10,7 +10,7 @@ idna==2.5
 inifile==0.3
 ipaddress==1.0.18
 itsdangerous==0.24
-Jinja2==2.8
+Jinja2==2.9.6
 Lektor==2.3
 MarkupSafe==0.23
 mistune==0.7.1
