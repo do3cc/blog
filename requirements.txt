@@ -18,7 +18,7 @@ ndg-httpsclient==0.4.2
 pathtools==0.1.2
 pipsi==0.9
 pyasn1==0.2.3
-pycparser==2.14
+pycparser==2.17
 pyOpenSSL==0.15.1
 pytz==2015.7
 PyYAML==3.11
