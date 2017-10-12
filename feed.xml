@@ -590,15 +590,6 @@ In plone.testing 5.0.0, integration tests monkey patch the &lt;code&gt;transacti
 &lt;p&gt;Go use plone.testing 5.0.0!&lt;/p&gt;
 </content>
   </entry>
-  <entry xml:base="http://do3.cc/blog/2012/09/264/debugging-zcrelations-/">
-    <title type="text">x</title>
-    <id>urn:uuid:92ba17b8-00e7-3421-9ebc-ae31e345c471</id>
-    <updated>2012-09-20T00:00:00Z</updated>
-    <link href="http://do3.cc/blog/2012/09/264/debugging-zcrelations-/" />
-    <author>
-      <name></name>
-    </author>
-  </entry>
   <entry xml:base="http://do3.cc/blog/2012/09/264/debugging-zcrelations---broken-btrees/">
     <title type="text">Debugging zc.relations / Broken BTrees</title>
     <id>urn:uuid:44b4148e-5e3a-3c75-91c0-d7d0babc2687</id>
@@ -660,6 +651,15 @@ That OOBTree claimed that the OOBTree does not contain that key, but when iterat
 &lt;p&gt;I am going to improve the error reporting in zc.relation to give a better hint of what might be wrong, but I am not sure of a good way to repair such a problem automatically.&lt;/p&gt;
 &lt;p&gt;Anyway, I hope this helps!&lt;/p&gt;
 </content>
+  </entry>
+  <entry xml:base="http://do3.cc/blog/2012/09/264/debugging-zcrelations-/">
+    <title type="text">x</title>
+    <id>urn:uuid:92ba17b8-00e7-3421-9ebc-ae31e345c471</id>
+    <updated>2012-09-20T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2012/09/264/debugging-zcrelations-/" />
+    <author>
+      <name></name>
+    </author>
   </entry>
   <entry xml:base="http://do3.cc/blog/2011/09/272/security-patch-party-auf-der-pycon-de/">
     <title type="text">Security Patch Party auf der PyCon DE</title>

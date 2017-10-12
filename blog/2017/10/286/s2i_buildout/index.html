@@ -1,0 +1,154 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="/static/gen/app.css?h=173dcabf">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
+<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
+<title>Building Plone Docker images with S2I — do3cc</title>
+<body>
+    <header>
+        <h1>Translator</h1>
+        <h2>Human → Computer</h2>
+        <nav>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Welcome</a></li>
+                
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                <li><a href="/presentations/">Presentations</a></li>
+                
+                <li><a href="/about/">About</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    <div class="page">
+        
+  
+  <div class="blog-post">
+  
+    <h2>Building Plone Docker images with S2I</h2>
+  
+  <p class="meta">
+    written by
+    
+      <a href="https://twitter.com/do3cc">Patrick Gerken</a>
+    
+    on 2017-10-13
+  </p>
+  <h4>Docker images with Dockerfile</h4>
+<div style="float: right">
+<img src="/static/many_pictures.jpg" alt="Many Paintings of different size on a wall" title="Eevery image is different">
+<br>
+<i><a href="https://commons.wikimedia.org/wiki/File:Alexandre_Brun_-_View_of_the_Salon_Carr%C3%A9_at_the_Louvre.jpg">Painting</a> under public domain</i>
+</div><p>When you want to package a Plone or Pyramid project as a Docker image, you usually write a Dockerfile. If you work on many projects, you will, over time, have many different Dockerfiles with only minor differences.
+Just like with your buildout configs<a href="/blog/2017/10/286/s2i_buildout/#1">1</a>.</p>
+<p>You now have many beautiful Dockerfiles, but they are all different.</p>
+<h4>Docker images with S2I</h4>
+<p>When you use <a href="https://github.com/openshift/source-to-image">S2I</a> to package your project into a Docker image, you run the S2I command and tell him which build image to use with which repository.</p>
+<p>The build images and your project must follow some conventions and then it builds everything without the need to configure anything.</p>
+<p>Red Hat provides build-images for the most common programming languages and their most common build sysem.
+<br><br></p>
+<p>Buildout is not one of them.
+<br><br></p>
+<h4>Using S2I with buildout</h4>
+<p>For testing purposes I wrote a builder image that supports buildout.</p>
+<p>Before you can play with it, follow the <a href="https://github.com/openshift/source-to-image#installation">instructions</a> to install S2I.</p>
+<p>Next, create new directory with a single file named <code>buildout.cfg</code>:</p>
+<pre><code>[buildout]
+parts = instance
+extends =
+    https://dist.plone.org/release/5-latest/versions.cfg
+versions = versions
+
+[instance]
+recipe = plone.recipe.zope2instance
+eggs =
+    Plone
+    Pillow
+user = admin:admin
+event-log = disable
+z2-log = disable
+</code></pre>
+<aside style="position: relative; top: -5em">
+Even though you declare to disable logs here, you still see the event logs in the console, because you will run zope in foreground mode.
+</aside><p>Finally, build your project:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span>s2i build -c . do3cc/buildout-centos7 minimal-build
+</pre></div>
+<p>That is it, you have a working Docker image with Plone inside:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span>docker run --interactive --tty --rm <span class="se">\</span>
+    --publish <span class="m">8080</span>:8080 <span class="se">\</span>
+    minimal-build
+</pre></div>
+<aside>
+You might have noticed a warning during startup, about unsafe permissions.
+<br>
+While I didn't verify it, I believe this happens in the end of the build process to keep the generated images <a href="https://docs.openshift.org/latest/creating_images/guidelines.html#openshift-origin-specific-guidelines">Openshift compatible</a>.
+</aside><p>If you access <a href="http://localhost:8080">http://localhost:8080</a>, you will now get asked to create a Plone site. Don't do that just yet.</p>
+<p>Before you do that, let us prepare a persistent zope storage.</p>
+<p>Plone assumes that on startup there are already the necessary directories for storing data, and the zope2instance recipe created this structure, in our image.</p>
+<p>Let us extract that structure:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span>docker run --interactive --tty --rm <span class="se">\</span>
+    minimal-build <span class="se">\</span>
+    tar cf - var <span class="p">|</span> tar xf -
+</pre></div>
+<p>Start a new container again, this time with the file system::</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span>docker run --interactive --tty --rm <span class="se">\</span>
+    --publish <span class="m">8080</span>:8080 --volume<span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span>/var:/opt/app-root/src/var <span class="se">\</span>
+    minimal-build
+</pre></div>
+<p>Now create a Plone site, then stop and start the docker container again. While the <code>--rm</code> flag ensured that our container got deleted, the volume still contains our data.</p>
+<h4>Inspect the generated image</h4>
+<p>Looking into the var directory you just mounted into the container, you'll notice that no log files were generated.</p>
+<p>Docker can handle logs for you, if you send them to stdout. You are doing this.
+See <a href="https://docs.docker.com/engine/admin/logging/overview/">https://docs.docker.com/engine/admin/logging/overview/</a> for more information.</p>
+<p>Let us inspect the docker image itself:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span>docker run --interactive --tty --rm <span class="se">\</span>
+    minimal-build <span class="se">\</span>
+    whoami
+</pre></div>
+<p>My name is default, that certainly isn't root. Your container will never run as root and has no sudo permissions.</p>
+<p>When you inspect the docker images, you notice the size is huge:</p>
+<div class="highlight"><pre><span></span><span class="gp">$</span>docker inspect do3cc/buildout-centos7
+<span class="gp">$</span>docker insepct minimal-build
+</pre></div>
+<p>Our builder image is 750 MB in size, our Plone image 1.1 GB.</p>
+<p>Our image still contains the whole requirements to build our Plone site.</p>
+<p>S2I allows to specify a different Runtime image for running your app. This can make the image a bit smaller, but not much. It can help with security though. So if this is important for you, you might want to check out the documenation about <a href="https://github.com/openshift/source-to-image/blob/master/docs/runtime_image.md">runtime-image</a></p>
+<h4>Q&amp;A</h4>
+<ul>
+<li><p>You might wonder if it possible to make the build process faster. Yes it is:</p>
+<div class="highlight"><pre><span></span><span class="gp">  $</span>s2i build --incremental -c . do3cc/buildout-centos7 minimal-build
+</pre></div>
+<p>This will look for an existing image <code>minimal-build</code> and run a script to extract artifacts. These will then be streamed into the fresh image. Unfortunately, the required artifacts are so big that at least on a mac, this can still be slow.</p>
+</li>
+<li><p>Do I need to build a new image every time I change the code?</p>
+<p>No, the same way you can mount in a data volume, you can mount in your source code.</p>
+</li>
+<li><p>Can I customize the build process?</p>
+<p>Yes, if you need to configure mirrors or set proxies, you can create a <code>.s2i/environment</code> file to add environment variables to your builder image and <code>.s2i/bin/assemble</code> or <code>.s2i/bin/run</code> scripts to modify the assemble process or the run process. Check out <a href="https://github.com/openshift/source-to-image/blob/master/docs/user_guide.md">https://github.com/openshift/source-to-image/blob/master/docs/user_guide.md</a> for the details.
+  If you need to install more packages, for example development header files for ldap, you are out of look here. In that case, you must write your own image builder. Just fork this image builder.</p>
+</li>
+<li><p>What about my buildout config containing varnish, nginx, supervisor etc?</p>
+<p>This is up to you, I suggest to reduce the responsabilities of your buildout to just assemble Plone and use other tools for the rest</p>
+</li>
+<li><p>Is this production ready?</p>
+<p>We don't use this with Plone right now, so I can't tell.</p>
+</li>
+</ul>
+<footnote>
+<a name="1"></a>You <em>can</em> have easily comparable buildout configs by using templates like the <a href="https://github.com/starzel/buildout/">Starzel buildout</a> structure, together with the normalize_buildout tool from the <a href="https://pypi.python.org/pypi/buildout-helpers/1.0.1">buildout-helpers</a> package.
+Which you really should &lt;/shameless plug&gt;
+</footnote>
+    <div data-social-share-privacy="true" data-uri="/blog/2017/10/286/s2i_buildout/" data-title="Building Plone Docker images with S2I"></div>
+  </div>
+
+  <div class="shariff">xxx</div>
+
+    </div>
+    <footer>
+        <a href="/site.html">Impressum</a>
+    </footer>
+    <script type=text/javascript src="/static/gen/app.js?h=dc579a7b" charset="utf-8"></script>
+</body>
