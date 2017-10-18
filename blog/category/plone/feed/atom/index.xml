@@ -2,13 +2,126 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">do3cc blog</title>
   <id>urn:uuid:3dea200e-c32c-377d-a59d-2d5294c23d66</id>
-  <updated>2016-10-30T00:00:00Z</updated>
+  <updated>2017-10-13T00:00:00Z</updated>
   <link href="http://do3.cc/blog/" />
   <link href="http://do3.cc/blog/category/plone/feed/atom/index.xml" rel="self" />
   <author>
     <name></name>
   </author>
   <generator uri="https://github.com/ajdavis/lektor-atom" version="0.1">Lektor Atom Plugin</generator>
+  <entry xml:base="http://do3.cc/blog/2017/10/286/s2i_buildout/">
+    <title type="text">Building Plone Docker images with S2I</title>
+    <id>urn:uuid:0fff8774-f3d9-36e2-97c5-c93c3c104a46</id>
+    <updated>2017-10-13T00:00:00Z</updated>
+    <link href="http://do3.cc/blog/2017/10/286/s2i_buildout/" />
+    <author>
+      <name>Patrick Gerken</name>
+    </author>
+    <content type="html">&lt;h4&gt;Docker images with Dockerfile&lt;/h4&gt;
+&lt;div style=&quot;float: right&quot;&gt;
+&lt;img src=&quot;/static/many_pictures.jpg&quot; alt=&quot;Many Paintings of different size on a wall&quot; title=&quot;Eevery image is different&quot;&gt;
+&lt;br&gt;
+&lt;i&gt;&lt;a href=&quot;https://commons.wikimedia.org/wiki/File:Alexandre_Brun_-_View_of_the_Salon_Carr%C3%A9_at_the_Louvre.jpg&quot;&gt;Painting&lt;/a&gt; under public domain&lt;/i&gt;
+&lt;/div&gt;&lt;p&gt;When you want to package a Plone or Pyramid project as a Docker image, you usually write a Dockerfile. If you work on many projects, you will, over time, have many different Dockerfiles with only minor differences.
+Just like with your buildout configs&lt;a href=&quot;/blog/2017/10/286/s2i_buildout/#1&quot;&gt;1&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You now have many beautiful Dockerfiles, but they are all different.&lt;/p&gt;
+&lt;h4&gt;Docker images with S2I&lt;/h4&gt;
+&lt;p&gt;When you use &lt;a href=&quot;https://github.com/openshift/source-to-image&quot;&gt;S2I&lt;/a&gt; to package your project into a Docker image, you run the S2I command and tell him which build image to use with which repository.&lt;/p&gt;
+&lt;p&gt;The build images and your project must follow some conventions and then it builds everything without the need to configure anything.&lt;/p&gt;
+&lt;p&gt;Red Hat provides build-images for the most common programming languages and their most common build sysem.
+&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Buildout is not one of them.
+&lt;br&gt;&lt;br&gt;&lt;/p&gt;
+&lt;h4&gt;Using S2I with buildout&lt;/h4&gt;
+&lt;p&gt;For testing purposes I wrote a builder image that supports buildout.&lt;/p&gt;
+&lt;p&gt;Before you can play with it, follow the &lt;a href=&quot;https://github.com/openshift/source-to-image#installation&quot;&gt;instructions&lt;/a&gt; to install S2I.&lt;/p&gt;
+&lt;p&gt;Next, create new directory with a single file named &lt;code&gt;buildout.cfg&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[buildout]
+parts = instance
+extends =
+    https://dist.plone.org/release/5-latest/versions.cfg
+versions = versions
+
+[instance]
+recipe = plone.recipe.zope2instance
+eggs =
+    Plone
+    Pillow
+user = admin:admin
+event-log = disable
+z2-log = disable
+&lt;/code&gt;&lt;/pre&gt;
+&lt;aside style=&quot;position: relative; top: -5em&quot;&gt;
+Even though you declare to disable logs here, you still see the event logs in the console, because you will run zope in foreground mode.
+&lt;/aside&gt;&lt;p&gt;Finally, build your project:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;s2i build -c . do3cc/buildout-centos7 minimal-build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That is it, you have a working Docker image with Plone inside:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;docker run --interactive --tty --rm &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    --publish &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt;:8080 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    minimal-build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;aside&gt;
+You might have noticed a warning during startup, about unsafe permissions.
+&lt;br&gt;
+While I didn't verify it, I believe this happens in the end of the build process to keep the generated images &lt;a href=&quot;https://docs.openshift.org/latest/creating_images/guidelines.html#openshift-origin-specific-guidelines&quot;&gt;Openshift compatible&lt;/a&gt;.
+&lt;/aside&gt;&lt;p&gt;If you access &lt;a href=&quot;http://localhost:8080&quot;&gt;http://localhost:8080&lt;/a&gt;, you will now get asked to create a Plone site. Don't do that just yet.&lt;/p&gt;
+&lt;p&gt;Before you do that, let us prepare a persistent zope storage.&lt;/p&gt;
+&lt;p&gt;Plone assumes that on startup there are already the necessary directories for storing data, and the zope2instance recipe created this structure, in our image.&lt;/p&gt;
+&lt;p&gt;Let us extract that structure:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;docker run --interactive --tty --rm &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    minimal-build &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    tar cf - var &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; tar xf -
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Start a new container again, this time with the file system::&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;docker run --interactive --tty --rm &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    --publish &lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt;:8080 --volume&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;PWD&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/var:/opt/app-root/src/var &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    minimal-build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now create a Plone site, then stop and start the docker container again. While the &lt;code&gt;--rm&lt;/code&gt; flag ensured that our container got deleted, the volume still contains our data.&lt;/p&gt;
+&lt;h4&gt;Inspect the generated image&lt;/h4&gt;
+&lt;p&gt;Looking into the var directory you just mounted into the container, you'll notice that no log files were generated.&lt;/p&gt;
+&lt;p&gt;Docker can handle logs for you, if you send them to stdout. You are doing this.
+See &lt;a href=&quot;https://docs.docker.com/engine/admin/logging/overview/&quot;&gt;https://docs.docker.com/engine/admin/logging/overview/&lt;/a&gt; for more information.&lt;/p&gt;
+&lt;p&gt;Let us inspect the docker image itself:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;docker run --interactive --tty --rm &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    minimal-build &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    whoami
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My name is default, that certainly isn't root. Your container will never run as root and has no sudo permissions.&lt;/p&gt;
+&lt;p&gt;When you inspect the docker images, you notice the size is huge:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;docker inspect do3cc/buildout-centos7
+&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;docker insepct minimal-build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Our builder image is 750 MB in size, our Plone image 1.1 GB.&lt;/p&gt;
+&lt;p&gt;Our image still contains the whole requirements to build our Plone site.&lt;/p&gt;
+&lt;p&gt;S2I allows to specify a different Runtime image for running your app. This can make the image a bit smaller, but not much. It can help with security though. So if this is important for you, you might want to check out the documenation about &lt;a href=&quot;https://github.com/openshift/source-to-image/blob/master/docs/runtime_image.md&quot;&gt;runtime-image&lt;/a&gt;&lt;/p&gt;
+&lt;h4&gt;Q&amp;amp;A&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;You might wonder if it possible to make the build process faster. Yes it is:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;gp&quot;&gt;  $&lt;/span&gt;s2i build --incremental -c . do3cc/buildout-centos7 minimal-build
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will look for an existing image &lt;code&gt;minimal-build&lt;/code&gt; and run a script to extract artifacts. These will then be streamed into the fresh image. Unfortunately, the required artifacts are so big that at least on a mac, this can still be slow.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Do I need to build a new image every time I change the code?&lt;/p&gt;
+&lt;p&gt;No, the same way you can mount in a data volume, you can mount in your source code.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Can I customize the build process?&lt;/p&gt;
+&lt;p&gt;Yes, if you need to configure mirrors or set proxies, you can create a &lt;code&gt;.s2i/environment&lt;/code&gt; file to add environment variables to your builder image and &lt;code&gt;.s2i/bin/assemble&lt;/code&gt; or &lt;code&gt;.s2i/bin/run&lt;/code&gt; scripts to modify the assemble process or the run process. Check out &lt;a href=&quot;https://github.com/openshift/source-to-image/blob/master/docs/user_guide.md&quot;&gt;https://github.com/openshift/source-to-image/blob/master/docs/user_guide.md&lt;/a&gt; for the details.
+  If you need to install more packages, for example development header files for ldap, you are out of look here. In that case, you must write your own image builder. Just fork this image builder.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What about my buildout config containing varnish, nginx, supervisor etc?&lt;/p&gt;
+&lt;p&gt;This is up to you, I suggest to reduce the responsabilities of your buildout to just assemble Plone and use other tools for the rest&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Is this production ready?&lt;/p&gt;
+&lt;p&gt;We don't use this with Plone right now, so I can't tell.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;footnote&gt;
+&lt;a name=&quot;1&quot;&gt;&lt;/a&gt;You &lt;em&gt;can&lt;/em&gt; have easily comparable buildout configs by using templates like the &lt;a href=&quot;https://github.com/starzel/buildout/&quot;&gt;Starzel buildout&lt;/a&gt; structure, together with the normalize_buildout tool from the &lt;a href=&quot;https://pypi.python.org/pypi/buildout-helpers/1.0.1&quot;&gt;buildout-helpers&lt;/a&gt; package.
+Which you really should &amp;lt;/shameless plug&amp;gt;
+&lt;/footnote&gt;</content>
+  </entry>
   <entry xml:base="http://do3.cc/blog/2016/10/304/andreas-jung-arango-db/">
     <title type="text">Andreas Jung - Hunting for the best NoSQL database. Why we love ArangoDB</title>
     <id>urn:uuid:0e3af0b5-6970-3398-847f-7ff571e581ca</id>
