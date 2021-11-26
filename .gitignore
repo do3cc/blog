@@ -3,7 +3,9 @@ blogofile/
 bin/
 include/
 lib/
+lib64
 local/
 webpack/.npm/
 webpack/node_modules/
 assets/static/gen/
+share/
