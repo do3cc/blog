@@ -4,9 +4,9 @@ url = http://do3.cc
 url_style = absolute
 
 [packages]
-lektor-markdown-highlighter = 0.1
-lektor-atom = 0.1
-lektor-webpack-support = 0.1
+lektor-markdown-highlighter = 0.3.1
+lektor-atom = 0.4
+lektor-webpack-support = 0.5
 
 [servers.prod]
 name = Prod
