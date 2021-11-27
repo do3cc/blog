@@ -1,13 +1,12 @@
-require('shariff/build/shariff.min.css');
-require('font-awesome/scss/font-awesome.scss');
-var Shariff = require('shariff');
-var $ = require('jquery');
-$(function() {
-    var buttonsContainer = $('.shariff');
-    console.log(buttonsContainer);
-    new Shariff(buttonsContainer, {
-        orientation: 'horizontal',
-        twitterVia: 'do3cc',
-        services: ['twitter', 'facebook', 'googleplus', 'reddit', 'info']
-    });
+require("shariff/dist/shariff.min.css");
+require("@fortawesome/fontawesome-free/scss/fontawesome.scss");
+var Shariff = require("shariff");
+var $ = require("jquery");
+$(function () {
+  var buttonsContainer = $(".shariff");
+  new Shariff(buttonsContainer, {
+    orientation: "horizontal",
+    twitterVia: "do3cc",
+    services: ["twitter", "facebook", "googleplus", "reddit", "info"],
+  });
 });
