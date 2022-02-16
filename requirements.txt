@@ -36,7 +36,7 @@ markupsafe==2.0.1
     # via jinja2
 mistune==0.8.4
     # via lektor
-python-slugify==5.0.2
+python-slugify==6.0.0
     # via lektor
 pytz==2021.3
     # via babel
