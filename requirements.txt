@@ -18,7 +18,7 @@ exifread==2.3.2
     # via lektor
 filetype==1.0.8
     # via lektor
-flask==2.0.2
+flask==2.1.1
     # via lektor
 idna==3.3
     # via requests
