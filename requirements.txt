@@ -14,7 +14,7 @@ click==8.0.3
     # via
     #   flask
     #   lektor
-exifread==2.3.2
+exifread==3.0.0
     # via lektor
 filetype==1.1.0
     # via lektor
