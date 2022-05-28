@@ -38,7 +38,7 @@ mistune==0.8.4
     # via lektor
 python-slugify==5.0.2
     # via lektor
-pytz==2021.3
+pytz==2022.1
     # via babel
 requests[security]==2.26.0
     # via lektor
