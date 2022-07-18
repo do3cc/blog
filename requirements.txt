@@ -30,7 +30,7 @@ jinja2==3.0.3
     # via
     #   flask
     #   lektor
-lektor==3.2.2
+lektor==3.3.5
     # via -r requirements.in
 markupsafe==2.0.1
     # via jinja2
