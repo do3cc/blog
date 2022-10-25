@@ -1,0 +1,22 @@
+name: Build all files to test building javascript
+on: [push]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-versions: ["15.x"]
+
+        steps:
+            - uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-versions }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-versions }}
+            - name: Install dependencies
+              run: |
+                  cd webpack
+                  npm install
+            - name: build webpack
+              run: |
+                  webpack build
