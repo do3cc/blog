@@ -19,5 +19,7 @@ jobs:
                   pip install -r requirements.txt
             - name: Build
               run: |
-                  bin/lektor build -f webpack
+                  ls -la
+                  ls -la bin
+                  ./bin/lektor build -f webpack
 
