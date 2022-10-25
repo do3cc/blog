@@ -1,1 +1,4 @@
 lektor==3.3.5
+lektor-markdown-highlighter==0.3.1
+lektor-atom==0.4
+lektor-webpack-support==0.6
