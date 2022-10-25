@@ -34,7 +34,7 @@ lektor==3.3.5
     # via -r requirements.in
 markupsafe==2.1.1
     # via jinja2
-mistune==0.8.4
+mistune==2.0.4
     # via lektor
 python-slugify==6.1.2
     # via lektor
