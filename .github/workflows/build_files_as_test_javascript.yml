@@ -5,7 +5,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-versions: ["15.x"]
+                node-versions: ["16.x"]
 
         steps:
             - uses: actions/checkout@v3
@@ -19,4 +19,6 @@ jobs:
                   npm install
             - name: build webpack
               run: |
+                  ls -la
+                  cd webpack
                   webpack build
