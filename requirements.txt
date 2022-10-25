@@ -20,7 +20,7 @@ filetype==1.1.0
     # via lektor
 flask==2.1.3
     # via lektor
-idna==3.3
+idna==3.4
     # via requests
 inifile==0.4.1
     # via lektor
