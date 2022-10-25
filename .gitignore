@@ -9,3 +9,4 @@ webpack/.npm/
 webpack/node_modules/
 assets/static/gen/
 share/
+pyvenv.cfg
