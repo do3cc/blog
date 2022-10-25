@@ -8,7 +8,7 @@ babel==2.10.3
     # via lektor
 certifi==2021.10.8
     # via requests
-charset-normalizer==2.1.0
+charset-normalizer==3.0.0
     # via requests
 click==8.0.3
     # via
