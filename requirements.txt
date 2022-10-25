@@ -39,7 +39,7 @@ lektor==3.3.7
     # via -r requirements.in
 lektor-atom==0.4
     # via -r requirements.in
-lektor-markdown-highlighter==0.3.1
+lektor-markdown-highlighter==0.3.2
     # via -r requirements.in
 lektor-webpack-support==0.6
     # via -r requirements.in
