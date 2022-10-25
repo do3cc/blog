@@ -1,0 +1,26 @@
+name: Build all files to test building python
+on: [push]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-versions: ["3.8"]
+
+        steps:
+            - uses: actions/checkout@v3
+            - name: Set up Python ${{ matrix.python-version }}
+              uses: actions/setup-python@v4
+              with:
+                  python-version: ${{ matrix.python-version }}
+            - name: Create venv
+              run: |
+                  python -m venv .
+                  ./bin/python -m pip install --upgrade pip wheel
+            - name: Install dependencies
+              run: |
+                  ./bin/pip install -r requirements.txt
+            - name: Build
+              run: |
+                  ./bin/lektor build -f webpack
+
