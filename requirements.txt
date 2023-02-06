@@ -54,7 +54,7 @@ packaging==21.3
     # via build
 pep517==0.13.0
     # via build
-pip-tools==6.10.0
+pip-tools==6.12.2
     # via -r requirements.in
 pygments==2.13.0
     # via lektor-markdown-highlighter
