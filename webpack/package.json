@@ -4,7 +4,7 @@
     "@babel/core": "^7.21.3",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
-    "eslint": "^8.36.0",
+    "eslint": "^8.38.0",
     "mini-css-extract-plugin": "^2.7.5",
     "shariff": "^3.2.1",
     "url": "^0.11.0",
