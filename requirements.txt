@@ -6,6 +6,8 @@
 #
 babel==2.10.3
     # via lektor
+blinker==1.6.2
+    # via flask
 build==0.8.0
     # via pip-tools
 certifi==2022.12.7
@@ -23,7 +25,7 @@ feedgenerator==2.0.0
     # via lektor-atom
 filetype==1.1.0
     # via lektor
-flask==2.2.2
+flask==2.3.2
     # via lektor
 idna==3.4
     # via requests
@@ -76,7 +78,7 @@ urllib3==1.26.12
     # via requests
 watchdog==2.1.9
     # via lektor
-werkzeug==2.2.3
+werkzeug==2.3.3
     # via
     #   flask
     #   lektor
