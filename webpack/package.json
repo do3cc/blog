@@ -3,7 +3,7 @@
   "devDependencies": {
     "@babel/core": "^7.21.8",
     "babel-loader": "^9.1.2",
-    "css-loader": "^6.7.4",
+    "css-loader": "^6.8.1",
     "eslint": "^8.41.0",
     "mini-css-extract-plugin": "^2.7.5",
     "shariff": "^3.2.1",
