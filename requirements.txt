@@ -59,7 +59,7 @@ pep517==0.13.0
     # via build
 pip-tools==6.14.0
     # via -r requirements.in
-pygments==2.13.0
+pygments==2.15.0
     # via lektor-markdown-highlighter
 pyparsing==3.0.9
     # via packaging
