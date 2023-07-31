@@ -2,4 +2,4 @@ lektor==3.3.10
 lektor-markdown-highlighter==0.3.2
 lektor-atom==0.4
 lektor-webpack-support==0.6
-pip-tools==6.14.0
+pip-tools==7.1.0
