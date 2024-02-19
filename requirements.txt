@@ -8,7 +8,7 @@ babel==2.10.3
     # via lektor
 blinker==1.6.2
     # via flask
-build==0.8.0
+build==1.0.3
     # via pip-tools
 certifi==2023.7.22
     # via requests
@@ -55,14 +55,16 @@ mistune==0.8.4
     # via lektor
 packaging==21.3
     # via build
-pep517==0.13.0
-    # via build
-pip-tools==7.3.0
+pip-tools==7.4.0
     # via -r requirements.in
 pygments==2.15.0
     # via lektor-markdown-highlighter
 pyparsing==3.0.9
     # via packaging
+pyproject-hooks==1.0.0
+    # via
+    #   build
+    #   pip-tools
 python-slugify==6.1.2
     # via lektor
 pytz==2022.5
