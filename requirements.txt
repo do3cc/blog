@@ -55,7 +55,7 @@ mistune==0.8.4
     # via lektor
 packaging==21.3
     # via build
-pip-tools==7.4.0
+pip-tools==7.4.1
     # via -r requirements.in
 pygments==2.15.0
     # via lektor-markdown-highlighter
