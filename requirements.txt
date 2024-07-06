@@ -10,7 +10,7 @@ blinker==1.6.2
     # via flask
 build==1.0.3
     # via pip-tools
-certifi==2023.7.22
+certifi==2024.7.4
     # via requests
 charset-normalizer==2.1.1
     # via requests
