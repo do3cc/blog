@@ -37,7 +37,7 @@ jinja2==3.1.4
     # via
     #   flask
     #   lektor
-lektor==3.3.11
+lektor==3.3.12
     # via -r requirements.in
 lektor-atom==0.4.0
     # via -r requirements.in
