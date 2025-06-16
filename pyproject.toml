@@ -2,7 +2,6 @@
 name = "do3ccblog"
 version = "0.1.0"
 description = "Patrick's personal blog built with Lektor - texts and presentations about Python, web development, and tech"
-readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "lektor>=3.3.11",
