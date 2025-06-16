@@ -19,7 +19,7 @@ jobs:
                   ./bin/python -m pip install --upgrade pip wheel
             - name: Install dependencies
               run: |
-                  ./bin/pip install -r requirements.txt
+                  ./bin/pip install -e .
             - name: Build
               run: |
                   ./bin/lektor build -f webpack
