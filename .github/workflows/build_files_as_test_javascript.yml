@@ -5,19 +5,19 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-versions: ["16.x"]
+                node-versions: ["22.x"]
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - name: Use Node.js ${{ matrix.node-versions }}
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-versions }}
             - name: Install dependencies
               run: |
                   cd webpack
-                  npm install
+                  npm ci
             - name: build webpack
               run: |
                   cd webpack
-                  webpack build
+                  npx webpack build
