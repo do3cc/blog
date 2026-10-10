@@ -18,3 +18,28 @@ jobs:
         uses: actions/checkout@v3
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v2
+        with:
+          # Lektor 3.3.14 pins mistune<2, Werkzeug<2.4 and the matching Flask; see issues #415-#417.
+          allow-ghsas: >-
+            GHSA-29vq-49wr-vm6x,
+            GHSA-2g68-c3qc-8985,
+            GHSA-2hm2-hc3v-44h9,
+            GHSA-4j32-57v6-6g45,
+            GHSA-58cw-g322-p94v,
+            GHSA-68rp-wp8r-4726,
+            GHSA-87hc-h4r5-73f7,
+            GHSA-8c25-4j27-2rv3,
+            GHSA-8g87-j6q8-g93x,
+            GHSA-8mpj-m6qm-5qr8,
+            GHSA-c8j7-8cv4-2xmq,
+            GHSA-f9vj-2wh5-fj8j,
+            GHSA-ffq3-xpv3-j92q,
+            GHSA-g6x2-hccm-hh4m,
+            GHSA-g97x-gvcm-x72h,
+            GHSA-h35f-9h28-mq5c,
+            GHSA-hgf8-39gv-g3f2,
+            GHSA-q34m-jh98-gwm2,
+            GHSA-qcq2-496w-v96p,
+            GHSA-qfrw-5rxm-mhh2,
+            GHSA-r4rv-85jg-w4mf,
+            GHSA-v87v-83h2-53w7
