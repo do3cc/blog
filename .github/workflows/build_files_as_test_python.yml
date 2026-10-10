@@ -3,23 +3,22 @@ on: [push]
 jobs:
     build:
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                python-versions: ["3.11", "3.12"]
 
         steps:
-            - uses: actions/checkout@v3
-            - name: Set up Python ${{ matrix.python-version }}
-              uses: actions/setup-python@v4
+            - uses: actions/checkout@v4
+            - name: Install uv
+              uses: astral-sh/setup-uv@v6
               with:
-                  python-version: ${{ matrix.python-version }}
-            - name: Create venv
-              run: |
-                  python -m venv .
-                  ./bin/python -m pip install --upgrade pip wheel
+                  python-version: "3.14"
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "22.x"
             - name: Install dependencies
               run: |
-                  ./bin/pip install -r requirements.txt
+                  uv sync --locked
+                  cd webpack
+                  npm ci
             - name: Build
               run: |
-                  ./bin/lektor build -f webpack
+                  uv run --locked lektor build -f webpack
