@@ -3,4 +3,16 @@
 {% block body %}
   <h2>{{ this.title }}</h2>
   {{ this.body }}
+  {% if this._path == '/' %}
+  <h3>Recent posts</h3>
+  <ul class="post-list">
+    {% for post in site.query('/blog').filter(F.author).limit(6) %}
+    <li>
+      <h3><a href="{{ post|url }}">{{ post.title }}</a></h3>
+      <p class="meta">{{ post.pub_date|dateformat }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  <p><a href="{{ '/blog'|url }}">All posts &raquo;</a></p>
+  {% endif %}
 {% endblock %}
