@@ -11,3 +11,4 @@ assets/static/gen/
 share/
 pyvenv.cfg
 .envrc
+__pycache__

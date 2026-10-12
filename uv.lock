@@ -193,6 +193,7 @@ dependencies = [
     { name = "lektor" },
     { name = "lektor-atom" },
     { name = "lektor-markdown-highlighter" },
+    { name = "lektor-mermaid" },
     { name = "lektor-webpack-support" },
 ]
 
@@ -201,6 +202,7 @@ requires-dist = [
     { name = "lektor", specifier = ">=3.3.11" },
     { name = "lektor-atom", specifier = ">=0.4" },
     { name = "lektor-markdown-highlighter", specifier = ">=0.3.2" },
+    { name = "lektor-mermaid", editable = "plugins/lektor-mermaid" },
     { name = "lektor-webpack-support", specifier = ">=0.6" },
 ]
 
@@ -336,6 +338,17 @@ dependencies = [
 wheels = [
     { url = "https://files.pythonhosted.org/packages/90/a1/3a111391644bbbf2b76bea5c80a0bbcfd8cb12b4b2ffdeac60e23b5458d9/lektor_markdown_highlighter-0.3.2-py2.py3-none-any.whl", hash = "sha256:8af5468928f039106cb760844d1c78556b7838c47ee792c13dc81ca45a5d2ad0", size = 4236, upload-time = "2022-04-30T04:01:28.525Z" },
 ]
+
+[[package]]
+name = "lektor-mermaid"
+version = "0.1.0"
+source = { editable = "plugins/lektor-mermaid" }
+dependencies = [
+    { name = "lektor" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "lektor", specifier = ">=3.3.11" }]
 
 [[package]]
 name = "lektor-webpack-support"
