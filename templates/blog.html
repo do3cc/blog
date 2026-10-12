@@ -1,26 +1,19 @@
 {% extends "layout.html" %}
-{% from "macros/blog.html" import render_blog_post %}
 {% from "macros/pagination.html" import render_pagination %}
 {% block title %}{{ this.title }}{% endblock %}
 {% block body %}
+  <h2>{{ this.title }}</h2>
+  <ul class="post-list">
   {% for child in this.pagination.items %}
     {% if child.author %}
-      <h2><a href="{{ child|url }}">{{ child.title }}</a></h2>
-      <p class="summary">
-        {{ child.summary }}
-        <a class="more" href="{{ child|url }}">Read&nbsp;more&nbsp;…</a>
-        <p class="meta">
-        by
-        {% if child.twitter_handle %}
-          <a href="https://twitter.com/{{ child.twitter_handle }}">{{ child.author or child.twitter_handle }}</a>
-        {% else %}
-          {{ child.author }}
-        {% endif %}
-        on {{ child.pub_date|dateformat }}
-        
-      </p>
+    <li>
+      <h3><a href="{{ child|url }}">{{ child.title }}</a></h3>
+      <p class="meta">{{ child.pub_date|dateformat }}</p>
+      {% if child.summary %}<p>{{ child.summary }}</p>{% endif %}
+    </li>
     {% endif %}
   {% endfor %}
+  </ul>
 
   {{ render_pagination(this.pagination) }}
 {% endblock %}

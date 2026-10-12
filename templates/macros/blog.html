@@ -1,5 +1,5 @@
 {% macro render_blog_post(post, from_index=false) %}
-  <div class="blog-post">
+  <article class="blog-post">
   {% if from_index %}
     <h2><a href="{{ post|url }}">{{ post.title }}</a></h2>
   {% else %}
@@ -8,14 +8,12 @@
   <p class="meta">
     written by
     {% if post.twitter_handle %}
-      <a href="https://twitter.com/{{ post.twitter_handle
-        }}">{{ post.author or post.twitter_handle }}</a>
+      <a href="https://twitter.com/{{ post.twitter_handle }}">{{ post.author or post.twitter_handle }}</a>
     {% else %}
       {{ post.author }}
     {% endif %}
-    on {{ post.pub_date }}
+    on {{ post.pub_date|dateformat }}
   </p>
   {{ post.body }}
-    <div data-social-share-privacy="true" data-uri="{{ post|url }}" data-title="{{ post.title }}"></div>
-  </div>
+  </article>
 {% endmacro %}

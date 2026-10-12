@@ -1,35 +1,51 @@
 <!doctype html>
-<meta charset="utf-8">
-<link rel="stylesheet" href="{{ '/static/gen/app.css'|asseturl }}">
-<link rel="stylesheet" href="{{ '/static/style.css'|url }}">
-<link rel="stylesheet" href="{{ get_pygments_stylesheet()|url }}">
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed" />
-<link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed" />
-<title>{% block title %}Welcome{% endblock %} — do3cc</title>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>{% block title %}Welcome{% endblock %} — do3cc</title>
+    <link rel="stylesheet" href="{{ '/static/style.css'|url }}">
+    <link rel="stylesheet" href="{{ get_pygments_stylesheet()|url }}">
+    <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/blog/category/plone/feed/atom/index.xml" type="application/atom+xml" rel="alternate" title="Plone ATOM Feed">
+</head>
 <body>
     <header>
-        <h1>Translator</h1>
-        <h2>Human → Computer</h2>
-        <nav>
-            <ul class="nav navbar-nav">
-                <li{% if this._path == '/' %} class="active"{% endif
-                                              %}><a href="{{ '/'|url }}">Welcome</a></li>
-                {% for href, title in [
-                ['/blog', 'Blog'],
-                ['/presentations', 'Presentations'],
-                ['/about', 'About']
-                ] %}
-                <li{% if this.is_child_of(href) %} class="active"{% endif
-                                                   %}><a href="{{ href|url }}">{{ title }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
+        <div class="wrap">
+            <p class="site-title"><a href="{{ '/'|url }}">Translator</a></p>
+            <p class="tagline">Human → Computer</p>
+            <nav aria-label="Main">
+                <ul>
+                    <li{% if this._path == '/' %} class="active"{% endif %}><a href="{{ '/'|url }}">Welcome</a></li>
+                    {# Presentations are outdated: unlinked, but still online under /presentations/ #}
+                    {% for href, title in [
+                        ['/blog', 'Blog'],
+                        ['/about', 'About']
+                    ] %}
+                    <li{% if this.is_child_of(href, strict=False) %} class="active"{% endif %}><a href="{{ href|url }}">{{ title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
     </header>
-    <div class="page">
-        {% block body %}{% endblock %}
-    </div>
+    <main>
+        <div class="wrap">
+            {% block body %}{% endblock %}
+        </div>
+    </main>
     <footer>
-        <a href="/site.html">Impressum</a>
+        <div class="wrap">
+            <span><a href="{{ '/site.html'|url }}">Impressum</a></span>
+            <span><a href="/feed.xml">Atom feed</a></span>
+        </div>
     </footer>
-    <script type=text/javascript src="{{ '/static/gen/app.js'|asseturl }}" charset="utf-8"></script>
+    <script type="module">
+        if (document.querySelector("pre.mermaid")) {
+            const { default: mermaid } = await import("https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs");
+            mermaid.initialize({ startOnLoad: false });
+            await mermaid.run();
+        }
+    </script>
 </body>
+</html>
