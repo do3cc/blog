@@ -1,28 +1,28 @@
-# Patricks Blog
+# Patrick's Blog
 
-Texte von mir
+Notes by me
 
 # Installation
 
-Dieses Blog wird gebaut mit einem [Headless CMS][headless_cms] namens [Lektor][lektor] gebaut.
+This blog is built with a [headless CMS][headless_cms] called [Lektor][lektor].
 
-Dank [uv][uv] und der relativ stabilen Entwicklung von [Lektor][lektor] pflege ich keine Liste an Abhängigkeiten und Versionen im Backend.
+Thanks to [uv][uv] and the relatively stable development of [Lektor][lektor], I don't maintain a list of backend dependencies and versions.
 
-Man muss [uv][uv] eingerichtet haben, und kann mit
+You need to have [uv][uv] set up, and can then run
 
 ```bash
-    $ uvx lektor server
+    $ uv run lektor server
 ```
 
-unter <http://127.0.0.1:5000> schauen, wie es aussieht.
+to see what it looks like at <http://127.0.0.1:5000>.
 
-# Hochladen
+# Uploading
 
 # Feedback
 
-# Geplante Features
+# Planned Features
 
-# Mitmachen
+# Contributing
 
 # Links
 
