@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Patrick's personal blog built with Lektor - texts and presentations about Python, web development, and tech"
 requires-python = ">=3.11"
 dependencies = [
-    "lektor>=3.3.11",
+    "lektor>=3.4.0b15",
     "lektor-markdown-highlighter>=0.3.2",
     "lektor-atom>=0.4",
     "lektor-webpack-support>=0.6",

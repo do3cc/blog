@@ -212,7 +212,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "lektor", specifier = ">=3.3.11" },
+    { name = "lektor", specifier = ">=3.4.0b15" },
     { name = "lektor-atom", specifier = ">=0.4" },
     { name = "lektor-markdown-highlighter", specifier = ">=0.3.2" },
     { name = "lektor-mermaid", editable = "plugins/lektor-mermaid" },
