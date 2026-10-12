@@ -6,7 +6,7 @@
   {% if this._path == '/' %}
   <h3>Recent posts</h3>
   <ul class="post-list">
-    {% for post in site.query('/blog').filter(F.author).limit(6) %}
+    {% for post in site.query('/blog').include_hidden(False).filter(F.author).limit(6) %}
     <li>
       <h3><a href="{{ post|url }}">{{ post.title }}</a></h3>
       <p class="meta">{{ post.pub_date|dateformat }}</p>

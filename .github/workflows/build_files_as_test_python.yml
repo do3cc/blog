@@ -19,6 +19,8 @@ jobs:
                   uv sync --locked
                   cd webpack
                   npm ci
+            - name: Check imprint
+              run: python3 scripts/check_imprint.py
             - name: Build
               run: |
                   uv run --locked lektor build -f webpack
