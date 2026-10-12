@@ -8,7 +8,11 @@ dependencies = [
     "lektor-markdown-highlighter>=0.3.2",
     "lektor-atom>=0.4",
     "lektor-webpack-support>=0.6",
+    "lektor-mermaid",
 ]
 
 [tool.uv]
 package = false
+
+[tool.uv.sources]
+lektor-mermaid = { path = "plugins/lektor-mermaid", editable = true }
